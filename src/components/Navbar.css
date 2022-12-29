@@ -1,0 +1,19 @@
+.navbar-color{
+    background-color: #CB997E;
+    color: #fff;
+}
+
+.btn-auth{
+    background-color: #915AA5;
+    color: #fff;
+}
+
+.btn-auth:hover{
+    background-color: rgba(145, 90, 165, 0.8);
+    color: #fff;
+}
+
+.btn-auth:active{
+    background-color: rgba(145, 90, 165, 0.6);
+    color: #fff;
+}
