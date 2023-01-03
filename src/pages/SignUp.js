@@ -21,7 +21,7 @@ const SignUp = () => {
             <div className='row form-auth'>
                 <h2 className='landing-text'>Your exploration begins here.</h2>
                 <form className='mt-4'>
-                    <div className='row row-auth g-2'>
+                    <div className='row row-name g-2'>
                         <input type='text' className='col me-1' placeholder='First Name' name='first_name' required/>
                         <input type='text' className='col ms-1' placeholder='Last Name' name='last_name' required/>
                     </div>

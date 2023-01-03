@@ -30,9 +30,9 @@ const LogIn = () => {
                         }
                         </span>
                     </div>
-                    <div className='mt-0 row justify-content-start'>
-                        <input className="col-1" type="checkbox" value="" id="flexCheckDefault"/>
-                        <label className="col-4 mt-1" for="flexCheckDefault" style={{textAlign:'left'}}>
+                    <div className='mt-0 row justify-content-start remember-group'>
+                        <input className="col-1 ms-2" type="checkbox" value="" id="flexCheckDefault"/>
+                        <label className="col-lg-4 col-8 mt-1" for="flexCheckDefault" style={{textAlign:'left'}}>
                             Remember Me
                         </label>
                     </div>
