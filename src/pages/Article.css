@@ -1,0 +1,23 @@
+.container-article {
+    height: 100vh;
+    font-family: 'Crismon Pro';
+}
+
+.container-article h2 {
+    font-weight: 700;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">" !important;
+    
+    color: #CB997E !important;
+}
+
+.navigate-menu {
+    margin-left: 27%;
+}
+
+.navigate-menu a {
+    text-decoration: none;
+    color: #CB997E;
+}
