@@ -6,7 +6,7 @@ import Navbar from "../components/Navbar";
 const Articles = () => {
   const { user: currentUser } = useSelector((state) => state.auth);
 
-  if (currentUser && currentUser.role === "Editor" || currentUser.role === "Doctor") {
+  if (currentUser && (currentUser.role === "Editor" || currentUser.role === "Doctor")) {
     return (
         <div>
             <Navbar />
