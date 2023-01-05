@@ -1,12 +1,61 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaEye, FaEyeSlash, FaLock } from 'react-icons/fa';
 import loginImage from '../assets/logInImage.png';
 import AuthLayout from '../components/AuthLayout';
+import { Navigate, Link, useNavigate } from 'react-router-dom';
+import { login } from '../redux/actions/auth';
 
 const LogIn = () => {
+
+    const navigate = useNavigate();
+
     const [eye,setEye] = useState(true);
-    const [password,setPassword] = useState("password");
-    
+    const [password,setPassword] = useState("");
+    const [email,setEmail] = useState("");
+    const [loading,setLoading] = useState(false);
+
+    const { isLoggedIn } = useSelector(state => state.auth);
+    const { message } = useSelector(state => state.message);
+
+    const dispatch = useDispatch();
+
+    const onChangeEmail = (e) => {
+        const email = e.target.value;
+        setEmail(email);
+    };
+
+    const onChangePassword = (e) => {
+        const password = e.target.value;
+        setPassword(password);
+    };
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        setLoading(true);
+        dispatch(login(email,password))
+            .then(() => {
+                navigate('/');
+                window.location.reload();
+            })
+            .catch(() => {
+                setLoading(false);
+            });
+    };
+
+    if (isLoggedIn) {
+      return <Navigate to="/" />;
+    }
+
+    const checkLogin = (e) => {
+        e.preventDefault();
+        if(email === "" || password === "") {
+            alert("Please fill all the fields");
+        } else {
+            handleLogin();
+        }
+    };
+
     const Eye = () => {
         if (password==="password") {
             setPassword("text");
@@ -20,10 +69,10 @@ const LogIn = () => {
         <AuthLayout image={loginImage} textAuth={`Don't have an account? `} linkAuth={'/signup'} linkText={'Sign Up'}>
             <div className='row form-auth'>
                 <h2 className='landing-text'>Read, ask, research.</h2>
-                <form className='mt-4'>
-                    <input type="email" placeholder="Enter Email" name="email" required />
+                <form className='mt-4' onSubmit={checkLogin}>
+                    <input type="email" placeholder="Enter Email" name="email" required className='form-control' onChange={onChangeEmail} />
                     <div className='input-group'>
-                        <input type={password} placeholder="Password" name="password" className='form-control' required />
+                        <input type={password} placeholder="Password" name="password" className='form-control' required onChange={onChangePassword} />
                         <span className='input-group-text'>
                         {
                             eye ? <FaEye onClick={Eye}/> : <FaEyeSlash onClick={Eye}/>
@@ -36,7 +85,11 @@ const LogIn = () => {
                             Remember Me
                         </label>
                     </div>
-                    <button className='btn-auth mt-4 auth-action' style={{fontWeight:'700'}}>Sign In</button>
+                    <button className='btn-auth mt-4 auth-action' style={{fontWeight:'700'}} onClick={handleLogin} disabled={loading}>
+                        { loading && ( <span className="spinner-border spinner-border-sm"></span> ) } 
+                        { loading && <span> Loading...</span> }
+                        { !loading && <span>Log In</span> }
+                    </button>
                     <p className='mb-4' style={{textAlign:'center'}}><FaLock/> Forgot Password?</p>
                     <p className='text-or mt-2 mb-2'><span>Or</span></p>
                     <button className='btn-auth-google mt-4'>

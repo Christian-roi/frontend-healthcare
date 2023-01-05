@@ -7,11 +7,11 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <div className="App">
-      <Router>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/articles" element={<h1>Articles</h1>} />
@@ -19,7 +19,6 @@ function App() {
           <Route path="/login" element={<LogIn />} />
           <Route path='/signup' element={<SignUp />} />
         </Routes>
-      </Router>
     </div>
   );
 }
