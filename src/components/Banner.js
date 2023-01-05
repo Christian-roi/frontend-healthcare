@@ -32,7 +32,7 @@ const Banner = () => {
             </div>
           </div>
         </div>
-        <div className="col-12 col-md-6 col-lg-6 col-xl-6 justify-content-end text-end">
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6 justify-content-end text-center">
           <img
             src={process.env.PUBLIC_URL + "/banner2.svg"}
             alt="hero"
