@@ -8,6 +8,7 @@ const Home = () => {
     <div>
         <Navbar />
         <Banner />
+        {/* Show user logged in */}
     </div>
   );
 };

@@ -91,6 +91,7 @@ const SignUp = () => {
                 name="firstName"
                 required
                 onChange={onChangeFirstName}
+                value={firstName}
               />
               <input
                 type="text"
@@ -99,6 +100,7 @@ const SignUp = () => {
                 name="lastName"
                 required
                 onChange={onChangeLastName}
+                value={lastName}
               />
             </div>
             <input
@@ -107,6 +109,7 @@ const SignUp = () => {
               name="email"
               required
               onChange={onChangeEmail}
+              value={email}
             />
             <div className="input-group">
               <input
@@ -144,11 +147,11 @@ const SignUp = () => {
         )}
 
         {message && (
-            <div className="form-group">
-                <div className="alert alert-danger" role="alert">
-                    {message} 
-                </div>
+          <div className="form-group">
+            <div className="alert alert-danger" role="alert">
+              {message}
             </div>
+          </div>
         )}
       </div>
     </AuthLayout>

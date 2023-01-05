@@ -70,9 +70,9 @@ const LogIn = () => {
             <div className='row form-auth'>
                 <h2 className='landing-text'>Read, ask, research.</h2>
                 <form className='mt-4' onSubmit={checkLogin}>
-                    <input type="email" placeholder="Enter Email" name="email" required className='form-control' onChange={onChangeEmail} />
+                    <input type="email" placeholder="Enter Email" name="email" required className='form-control' onChange={onChangeEmail} value={email} />
                     <div className='input-group'>
-                        <input type={password} placeholder="Password" name="password" className='form-control' required onChange={onChangePassword} />
+                        <input type={password} placeholder="Password" name="password" className='form-control' required onChange={onChangePassword} value={password} />
                         <span className='input-group-text'>
                         {
                             eye ? <FaEye onClick={Eye}/> : <FaEyeSlash onClick={Eye}/>
