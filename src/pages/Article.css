@@ -3,7 +3,7 @@
     font-family: 'Crismon Pro';
 }
 
-.container-article h2 {
+.container-article h2, h5, h4 {
     font-weight: 700;
 }
 
@@ -20,4 +20,22 @@
 .navigate-menu a {
     text-decoration: none;
     color: #CB997E;
+}
+
+.post-detail-description {
+    font-weight: 400;
+    color: #D9D9D9;
+    font-size: 12px;
+}
+
+.content-detail-post {
+    text-align: justify;
+    font-size: 1rem;
+    color: #292929;
+}
+
+@media only screen and (max-width:900px) {
+    .navigate-menu {
+        margin: 1em 1.5em;
+    }
 }

@@ -1,8 +1,27 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useCallback, Fragment } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./Navbar.css";
 
+import { logout } from "../redux/actions/auth";
+import { clearMessage } from "../redux/actions/message";
+
 const Navbar = () => {
+  const { user: currentUser } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (["/login", "/register"].includes(location.pathname)) {
+      dispatch(clearMessage());
+    }
+  }, [dispatch, location]);
+
+  const handleLogout = useCallback(() => {
+    dispatch(logout());
+  }, [dispatch]);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark navbar-color">
       <div className="container">
@@ -37,9 +56,53 @@ const Navbar = () => {
               QnA
             </Link>
             {/* <Link className="nav-link mx-3" to="/login">Login</Link> */}
-            <Link className="btn btn-auth mx-3 text-white" to="/login">
-              Login
-            </Link>
+            {/* If currentUser.roleid = 1 */}
+            {currentUser && currentUser.role === "Admin" ? (
+              <Fragment>
+                <Link className="nav-link active mx-3" to="/admin">
+                  Admin
+                </Link>
+              </Fragment>
+            ) : (
+              <Fragment></Fragment>
+            )}
+            {/* {currentUser && currentUser.role === "Editor" ? (
+              <Fragment>
+                <Link className="nav-link active mx-3" to="/articles">
+                  Create Articles
+                </Link>
+              </Fragment>
+            ) : (
+              <Fragment></Fragment>
+            )} */}
+            {currentUser && currentUser.role === "Doctor" ? (
+              <Fragment>
+                <Link className="nav-link active mx-3" to="/admin">
+                  Admin
+                </Link>
+              </Fragment>
+            ) : (
+              <Fragment></Fragment>
+            )}
+            {currentUser ? (
+              <Fragment>
+                <Link to="/">
+                  <button
+                    className="btn btn-danger mx-3 text-white"
+                    onClick={handleLogout}
+                    type="button"
+                  >
+                    Log Out
+                  </button>
+                </Link>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <Link className="btn btn-auth mx-3 text-white" to="/login">
+                  Login
+                </Link>
+              </Fragment>
+            )}
           </div>
         </div>
       </div>

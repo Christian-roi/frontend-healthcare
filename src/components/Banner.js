@@ -6,7 +6,6 @@ const Banner = () => {
   return (
     <div className="container banner-bg">
       <div className="row">
-        {/* Make Responsible Hero Section for Mobile View */}
         <div className="col-12 col-md-6 col-lg-6 col-xl-6 justify-content-start text-start mt-5">
           <div className="hero-section">
             <h3 className="hero-title mb-2">
@@ -33,7 +32,7 @@ const Banner = () => {
             </div>
           </div>
         </div>
-        <div className="col-12 col-md-6 col-lg-6 col-xl-6 justify-content-end text-end">
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6 justify-content-end text-center">
           <img
             src={process.env.PUBLIC_URL + "/banner2.svg"}
             alt="hero"

@@ -4,6 +4,12 @@
     clip-path: inset(0 -100vmax);
 }
 
+.banner-qna {
+    background-color: #D4AA94;
+    box-shadow: 0 0 0 100vmax #D4AA94;
+    clip-path: inset(0 -100vmax);
+}
+
 .hero-title{
     font-family: 'Crimson Pro';
     font-style: normal;
