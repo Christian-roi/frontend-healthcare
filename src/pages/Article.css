@@ -1,5 +1,5 @@
 .container-article {
-    height: 100vh;
+    /* height: 100vh; */
     font-family: 'Crismon Pro';
 }
 
@@ -32,6 +32,38 @@
     text-align: justify;
     font-size: 1rem;
     color: #292929;
+}
+
+.btn-file-image {
+    background-color: #E4E4E4;
+    border-radius: 0.5rem;
+    border: 0.1rem solid #E4E4E4;
+    cursor: pointer;
+}
+
+.btn-file-image svg {
+    margin-top: 20%;
+    color: #292929;
+    font-size: 2rem;
+}
+
+.preview {
+    margin-top: 50;
+    display: "flex";
+    flex-direction: "column";
+}
+
+.preview img {
+    max-width: 100%;
+}
+
+.btn-remove-preview {
+    background-color: #cb997e;
+}
+
+.btn-remove-preview:hover {
+    background-color: #a27a64;
+    color: white;
 }
 
 @media only screen and (max-width:900px) {

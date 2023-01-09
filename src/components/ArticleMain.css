@@ -77,8 +77,26 @@
     color: #794B89;
 }
 
+.select-category {
+    border: 1px solid #794B89;
+    color: #794B89;
+}
+
+.btn-create-article {
+    background-color: #915AA5;
+    color: white;
+}
+
+.btn-create-article:hover {
+    background-color: #B691C3;
+    color: white;
+}
+
 @media only screen and (max-width:900px) {
     .btn-add-article {
         width: 100%;
+    }
+    #title {
+        margin-top: 10px;
     }
 }
