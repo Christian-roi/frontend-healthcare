@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar"
 import Banner from "../components/Banner";
 import Article from "../components/Article";
 import QnABanner from "../components/QnABanner";
+import Footer from "../components/Footer";
 
 const Home = () => {
   return (
@@ -12,7 +13,7 @@ const Home = () => {
         <Banner />
         <Article />
         <QnABanner />
-        {/* Show user logged in */}
+        <Footer/>
     </div>
   );
 };
