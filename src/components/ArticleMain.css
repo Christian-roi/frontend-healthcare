@@ -37,6 +37,48 @@
     color: #959595;
 }
 
+.post-thumb p {
+    display: inline;
+}
+
+.read-more {
+    color: #292929;
+    text-decoration: none;
+    display: inline;
+}
+
+.read-more:hover {
+    font-weight: 700;
+    color: #292929;
+}
+
+.icon-card {
+    margin-top: 25%;
+    color: #292929;
+}
+
 .big-card {
     font-size: 2em;
+}
+
+.btn-add-article{
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 0.1rem solid #794B89;
+    background-color: transparent;
+    color: #794B89;
+    width: 20%;
+}
+  
+.btn-add-article:hover{
+    border: 0.1rem solid #794B89;
+    background-color: #DAC8E1;
+    color: #794B89;
+}
+
+@media only screen and (max-width:900px) {
+    .btn-add-article {
+        width: 100%;
+    }
 }

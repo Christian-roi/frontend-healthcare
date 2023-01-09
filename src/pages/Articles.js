@@ -1,12 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import './Article.css'
 import ArticleMain from "../components/ArticleMain";
+import { FaPlus } from "react-icons/fa";
 
 const Articles = () => {
     const { user: currentUser } = useSelector((state) => state.auth);
+    const navigate = useNavigate();
     return (
         <div>
             <Navbar />
@@ -23,14 +25,23 @@ const Articles = () => {
                         </nav>
                     </div>
                     {
-                        currentUser && (currentUser.role === "Editor" || currentUser.role === "Doctor") ?
+                        currentUser && (currentUser.role == "Editor" || currentUser.role == "Doctor") ?
                             <div>
-                                <Navbar />
-                                <h1>Khusus Editor</h1>
+                                <ArticleMain textHeadline={'Read Your Best Writings Here'}>
+                                    <button 
+                                        className="btn-add-article"
+                                        onClick={() => {
+                                            navigate('/create-article');
+                                        }}>
+                                        <FaPlus/> <h6 style={{display: 'inline'}}>Create New Article!</h6>
+                                    </button>  
+                                </ArticleMain>
                             </div>
-                        : ''
+                        : 
+                            <div>
+                                <ArticleMain textHeadline={'Let your imagination explore.'} />
+                            </div>
                     }
-                    <ArticleMain />
                 </div>
             </div>
         </div>

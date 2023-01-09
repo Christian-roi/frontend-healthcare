@@ -4,8 +4,8 @@ const create = data => {
     return api.post('/api/posts', data);
 };
 
-const getAll = () => {
-    return api.get('/api/posts');
+const getAll = (params) => {
+    return api.get('/api/posts',{params});
 };
 
 const get = id => {

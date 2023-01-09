@@ -12,6 +12,7 @@ import LogIn from './pages/LogIn';
 import Articles from './pages/Articles';
 import QnAs from './pages/QnAs';
 import DetailArticle from './pages/DetailArticle';
+import CreateArticle from './pages/CreateArticle';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
     <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path='/create-article' element={<CreateArticle />}/>
           <Route path="/articles" element={<Articles />} />
           <Route path="/detail-article/:id" element={<DetailArticle />} />
           <Route path="/qnas" element={<QnAs />} />

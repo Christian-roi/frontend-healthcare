@@ -10,7 +10,7 @@ const Home = () => {
     <div>
         <Navbar />
         <Banner />
-        <ArticleMain />
+        <ArticleMain textHeadline={'Explore everything that interests you.'} />
         <QnABanner />
         {/* Show user logged in */}
     </div>
