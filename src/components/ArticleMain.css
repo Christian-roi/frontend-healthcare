@@ -1,5 +1,5 @@
 .main-article {
-    font-family: 'Crismon Pro';
+    font-family: 'Crimson Pro';
     /* background-color: #F5F5F5; */
 }
 
@@ -13,6 +13,17 @@
 }
 
 .list-category:hover {
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.list-discover {
+    font-weight: 500;
+    font-size: 18px;
+    color: #794B8A;
+}
+
+.list-discover:hover {
     cursor: pointer;
     font-weight: 700;
 }

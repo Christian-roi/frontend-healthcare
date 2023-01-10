@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FaRegBookmark, FaShare } from 'react-icons/fa'
+import { FaRegBookmark, FaShare } from 'react-icons/fa';
 import { fetchCategories } from '../redux/actions/category';
 import randomImage from '../assets/blank-profile.png';
 import './ArticleMain.css';
@@ -29,7 +29,7 @@ const ArticleMain = ({textHeadline,children}) => {
         getAllPosts();
     }, [dispatch]);
 
-    const posts = allPost.data
+    const posts = allPost.data;
 
     // console.log("INI CATEGORY",categories);
     const getByCategory = id => {
