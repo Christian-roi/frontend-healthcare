@@ -11,7 +11,7 @@
 }
 
 .hero-title{
-    font-family: 'Crimson Pro';
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 36px;
@@ -19,7 +19,7 @@
 }
 
 .hero-text{
-    font-family: 'Crimson Pro';
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
