@@ -17,7 +17,7 @@ const CreateArticle = () => {
     const categories = useSelector(state => state.category);
     const dataCategories = categories.data;
 
-    const userId = currentUser.id;
+    const userId =  currentUser ? currentUser.id : 0;
     const [categoryId, setCategoryId] = useState('');
     const [title, setTitle] = useState('');
     const [image, setImage] = useState('');

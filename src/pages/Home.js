@@ -5,6 +5,7 @@ import Banner from "../components/Banner";
 import ArticleMain from "../components/ArticleMain";
 import QnABanner from "../components/QnABanner";
 import Footer from "../components/Footer";
+import FacilityMain from "../components/FacilityMain";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
         <Banner />
         <ArticleMain textHeadline={'Explore everything that interests you.'} />
         <QnABanner />
+        <FacilityMain />
         <Footer/>
     </div>
   );

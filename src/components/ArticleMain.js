@@ -13,8 +13,11 @@ const ArticleMain = ({textHeadline,children}) => {
     const dataCategories = categories.data;
     const dispatch = useDispatch();
 
+    const [categoryId, setCategoryId] = useState(null);
+
     const params = {
-      limit: 5
+      limit: 5,
+      categoryId: categoryId
     }
 
     const [allPost, setAllPost] = useState([]);
@@ -33,7 +36,8 @@ const ArticleMain = ({textHeadline,children}) => {
 
     // console.log("INI CATEGORY",categories);
     const getByCategory = id => {
-        console.log("Category ID: ",id)
+      setCategoryId(id);
+      getAllPosts()
     }
 
     return (
