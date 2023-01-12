@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Banner.css";
 import { FaSearch } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const onChangeSearch = (e) => {
+    const search = e.target.value;
+    setSearchQuery(search);
+  };
+
+  const handleSearch = () => {
+    navigate('/articles',{state:{searchQuery: searchQuery}});
+  };
+
   return (
     <div className="container banner-bg">
       <div className="row">
@@ -21,11 +34,14 @@ const Banner = () => {
                 placeholder="Search for articles and QnA"
                 aria-label="Search for articles and QnA"
                 aria-describedby="button-addon2"
+                value={searchQuery}
+                onChange={onChangeSearch}
               />
               <button
                 className="btn btn-outline-secondary"
                 type="button"
                 id="button-addon2"
+                onClick={() => handleSearch()}
               >
                 <FaSearch />
               </button>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import './Article.css'
 import ArticleMain from "../components/ArticleMain";
@@ -16,14 +16,20 @@ const Articles = () => {
     const dataCategories = categories.data;
     
     const navigate = useNavigate();
+    const location = useLocation();
 
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(0);
     const [loading, setLoading] = useState(false);
     const [noData, setNoData] = useState(false);
 
+    const [categoryId, setCategoryId] = useState(null);
+    const [limit, setLimit] = useState(1);
+
     let params = {
-        limit : 1,
-        page: page
+        limit : limit,
+        page: page,
+        categoryId: categoryId,
+        search_query: location.state ? location.state.searchQuery : null
     }
 
     window.onscroll = () => {
@@ -35,19 +41,36 @@ const Articles = () => {
     }
 
     const [allPost, setAllPost] = useState([]);
-    const getAllPosts = async () => {
+    const getAllPosts =  () => {
         setLoading(true);
         setTimeout(() => {
             postService.getAll(params).then((res) => {
-                const newPage = page + 1;
-                const newList = allPost.concat(res.data.data);
-                setAllPost(newList);    
-                console.log(newList)
-                setPage(newPage);
-                if (res.data.data.length === 0) {
-                    setNoData(true);
+                if (categoryId) {
+                    // console.log("PAGE : ",page)
+                    // console.log("Limit : ",limit)
+                    // console.log("ALL POST : ",allPost)
+                    // console.log("Category : ",categoryId)
+                    setPage(null);
+                    setLimit(null);
+                    // const newPage = page + 1;
+                    // console.log(newPage)
+                    // const thePost = res.data.data;
+                    setAllPost(res.data.data) 
+                    // setPage(newPage)
+                    if (res.data.data.length === 0) {
+                        setNoData(true);
+                    }
+                } else {
+                    // console.log("SEMUA",allPost)
+                        const newPage = page + 1;
+                    const newList = allPost.concat(res.data.data);
+                    setAllPost(newList);    
+                    // console.log(newList)
+                    setPage(newPage);
+                    if (res.data.data.length === 0) {
+                        setNoData(true);
+                    }
                 }
-                
             }).catch((err) => { 
                 console.error(err)
             }).finally(() => {
@@ -60,8 +83,10 @@ const Articles = () => {
         getAllPosts();
     }, []);
 
+    // MASIH ADA BUG
     const getByCategory = id => {
-        console.log("Category ID: ",id)
+        setCategoryId(id);
+        getAllPosts()
     }
 
     return (
@@ -103,6 +128,12 @@ const Articles = () => {
                 </div>
                 <div className="container">                    
                     <div className="row mt-5">
+                    {
+                        location.state && location.state.searchQuery ?
+                            <h4>Result : {location.state.searchQuery}</h4>
+                            :
+                            ''
+                    }
                         <div className="col-lg-8">
                             <h2 style={{textAlign:'left'}}>Water your mind.</h2>
                             {

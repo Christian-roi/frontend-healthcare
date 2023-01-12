@@ -1,0 +1,61 @@
+.main-facility {
+    font-family: 'Crimson Pro';
+}
+
+.main-facility h2 {
+    font-weight: 700;
+}
+
+.title-main {
+    text-align: left;
+}
+
+.card {
+    border: none;
+}
+
+.card-title {
+    font-weight: 700;
+    text-align: left;
+}
+
+.card-title a {
+    text-decoration: none;
+    color: #292929;
+}
+
+.card-text {
+    font-weight: 500;
+    text-align: left;
+    color: #959595;
+}
+
+.post-thumb p {
+    display: inline;
+}
+
+/* .read-more {
+    color: #292929;
+    text-decoration: none;
+    display: inline;
+}
+
+.read-more:hover {
+    font-weight: 700;
+    color: #292929;
+} */
+
+.icon-card {
+    margin-top: 25%;
+    color: #292929;
+}
+
+.icon-arrow {
+    margin-top: 40%;
+    color: #794B89;
+    font-size: 3rem;
+}
+
+.icon-arrow:hover {
+    cursor: pointer;
+}
