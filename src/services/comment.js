@@ -1,9 +1,9 @@
 import api from '../api';
 
-const create = data => {
-    return api.post('/api/comments', data);
+// Create a new comment with post id
+const create = (id,data) => {
+    return api.post(`/api/comments/${id}`,data);
 }
-
 
 const getAll = (params) => {
     return api.get('/api/comments',{params});

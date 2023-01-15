@@ -132,10 +132,10 @@ const SignUp = () => {
             >
               Sign Up
             </button>
-            <p className="text-or mt-2 mb-2">
+            {/* <p className="text-or mt-2 mb-2">
               <span>Or</span>
-            </p>
-            <button className="btn-auth-google mt-4">
+            </p> */}
+            {/* <button className="btn-auth-google mt-4">
               <img
                 width="20px"
                 style={{ marginBottom: "3px", marginRight: "5px" }}
@@ -143,7 +143,7 @@ const SignUp = () => {
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
               />
               Sign Up With Google
-            </button>
+            </button> */}
           </form>
         )}
 

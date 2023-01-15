@@ -89,13 +89,13 @@ const LogIn = () => {
                         { loading && <span> Loading...</span> }
                         { !loading && <span>Log In</span> }
                     </button>
-                    <p className='mb-4' style={{textAlign:'center'}}><FaLock/> Forgot Password?</p>
-                    <p className='text-or mt-2 mb-2'><span>Or</span></p>
-                    <button className='btn-auth-google mt-4'>
+                    {/* <p className='mb-4' style={{textAlign:'center'}}><FaLock/> Forgot Password?</p> */}
+                    {/* <p className='text-or mt-2 mb-2'><span>Or</span></p> */}
+                    {/* <button className='btn-auth-google mt-4'>
                         <img width="20px" style={{marginBottom:"3px", marginRight:'5px'}} alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
                         Sign In With Google
                     </button>
-                        
+                         */}
                 </form>
             </div>
         </AuthLayout>

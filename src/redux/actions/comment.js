@@ -9,8 +9,8 @@ import {
 
 import commentService from '../../services/comment';
 
-export const addComment = (postId, data) => dispatch => {
-    return commentService.create(postId, data).then(
+export const addComment = (postId, userId, data) => dispatch => {
+    return commentService.create(postId, userId, data).then(
         response => {
             dispatch({
                 type: ADD_COMMENT_SUCCESS,
