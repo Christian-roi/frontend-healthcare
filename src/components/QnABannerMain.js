@@ -2,15 +2,18 @@ import React from "react";
 import "./Banner.css";
 import "./Navbar.css";
 import "./QnABanner.css";
-import { Link } from "react-router-dom";
 
-const QnABannerMain = () => {
+const QnABannerMain = (props) => {
   return (
-    <div className="container banner-qnamain">
+    <div className={`container ${props.className}`}>
+      {/*
+            props for banner color grey = "banner-grey"  
+         */}
       <div className="row">
         <div className="col-12 col-md-6 col-lg-6 col-xl-6 justify-content-center text-center">
           <img
-            src={process.env.PUBLIC_URL + "/qnamain.png"}
+            src={process.env.PUBLIC_URL + `${props.image}`}
+            // for main qna = "/qnamain.png" and for qna detail = "/qnadetail.png"
             alt="hero"
             className="img-fluid"
             width="60%"

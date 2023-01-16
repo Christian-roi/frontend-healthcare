@@ -13,7 +13,7 @@ const Home = () => {
         <Navbar />
         <Banner />
         <ArticleMain textHeadline={'Explore everything that interests you.'} />
-        <QnABanner />
+        <QnABanner image={'/qnamain.png'} />
         <FacilityMain />
         <Footer/>
     </div>

@@ -3,13 +3,13 @@ import "./Banner.css";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 
-const QnABanner = () => {
+const QnABanner = (props) => {
   return (
     <div className="container banner-qna">
       <div className="row">
         <div className="col-12 col-md-6 col-lg-6 col-xl-6 justify-content-center text-center">
           <img
-            src={process.env.PUBLIC_URL + "/qnaBanner.svg"}
+            src={process.env.PUBLIC_URL + `${props.image}`}
             alt="hero"
             className="img-fluid"
             width="60%"

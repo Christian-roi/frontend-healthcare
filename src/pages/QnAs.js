@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import QnABannerDetail from "../components/QnABannerDetail";
 import QnABannerMain from "../components/QnABannerMain";
 
 const QnAs = () => {
@@ -17,8 +16,7 @@ const QnAs = () => {
   return (
     <div>
       <Navbar />
-      <QnABannerMain /> 
-      {/* <QnABannerDetail /> => for the detail QnA Page */}
+      <QnABannerMain className="banner-grey" image="/qnamain.png" /> 
       <div className="container-fluid container-article">
         <div className="row mt-5 justify-content-start">
           <div className="col-lg-4 mt-4">
