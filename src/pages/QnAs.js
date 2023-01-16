@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import QnABannerDetail from "../components/QnABannerDetail";
+import QnABannerMain from "../components/QnABannerMain";
 
 const QnAs = () => {
 //   const { user: currentUser } = useSelector((state) => state.auth);
@@ -15,12 +17,14 @@ const QnAs = () => {
   return (
     <div>
       <Navbar />
+      <QnABannerMain /> 
+      {/* <QnABannerDetail /> => for the detail QnA Page */}
       <div className="container-fluid container-article">
-        <div className="row">
+        <div className="row mt-5 justify-content-start">
           <div className="col-lg-4 mt-4">
-              <h2>Ask the Doctor!</h2>
+              <h2 className="p-0">Ask the Doctor!</h2>
               <nav aria-label="breadcrumb">
-                  <ol className="breadcrumb navigate-menu">
+                  <ol className="breadcrumb navigate-menu text-start">
                       <li className="breadcrumb-item"><Link to={'/'}>Home</Link></li>
                       <li className="breadcrumb-item active" aria-current="page">QnA</li>
                   </ol>

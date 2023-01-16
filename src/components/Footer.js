@@ -24,7 +24,7 @@ const Footer = () => {
                 </p>
               </div>
               <div className="col-3 col-md-2 col-xs-12 ms-auto">
-                <div className="row">
+                {/* <div className="row">
                   <div className="col">
                     <h5 className="text-white">Company</h5>
                     <ul className="list-unstyled text-small">
@@ -46,7 +46,7 @@ const Footer = () => {
                     </ul>
                   </div>
                   
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
