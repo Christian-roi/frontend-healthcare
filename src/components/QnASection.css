@@ -1,0 +1,26 @@
+.qna-container {
+    padding-left: 10%;
+    padding-right: 10%;
+    text-align: left;
+}
+
+.qna-section .h-content {
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.qna-section .h-name {
+    color: #959595;
+    font-weight: 500;
+}
+
+.view-replies {
+    color: #915AA5;
+    font-size: 18px;
+}
+
+@media only screen and (max-width:900px) {
+    .qna-container {
+        padding: auto;
+    }
+}

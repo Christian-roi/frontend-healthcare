@@ -1,13 +1,9 @@
 import api from '../api';
 
-const url = "/api/category";
+const url = "/api/answers";
 
-const create = data => {
-    return api.post(url, data);
-};
-
-const getAll = () => {
-    return api.get(url);
+const create = (questionId, data) => {
+    return api.post(`${url}/${questionId}`, data);
 };
 
 const update = (id, data) => {
@@ -18,11 +14,10 @@ const remove = id => {
     return api.delete(`${url}/${id}`);
 };
 
-const categoryService = {
-    getAll,
+const answerService = {
     create,
     update,
     remove
 };
 
-export default categoryService;
+export default answerService;

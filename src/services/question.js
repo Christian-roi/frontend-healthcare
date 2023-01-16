@@ -1,6 +1,6 @@
 import api from '../api';
 
-const url = "/api/posts";
+const url = "/api/questions";
 
 const create = data => {
     return api.post(url, data);
@@ -22,7 +22,7 @@ const remove = id => {
     return api.delete(`${url}/${id}`);
 };
 
-const postService = {
+const questionService = {
     getAll,
     get,
     create,
@@ -30,4 +30,4 @@ const postService = {
     remove
 };
 
-export default postService;
+export default questionService;

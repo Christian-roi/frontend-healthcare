@@ -12,8 +12,7 @@ import CardArticle from "../components/CardArticle";
 const API_URL = 'http://localhost:8000/';
 const Articles = () => {
     const { user: currentUser } = useSelector((state) => state.auth);
-    const categories = useSelector(state => state.category);
-    const dataCategories = categories.data;
+    const dataCategories = useSelector(state => state.category).data;
     
     const navigate = useNavigate();
     const location = useLocation();
@@ -29,7 +28,7 @@ const Articles = () => {
         limit : limit,
         page: page,
         categoryId: categoryId,
-        search_query: location.state ? location.state.searchQuery : null
+        searchQuery: location.state ? location.state.searchQuery : null
     }
 
     window.onscroll = () => {

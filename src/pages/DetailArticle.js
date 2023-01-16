@@ -97,13 +97,6 @@ const DetailArticle = () => {
     getCommentByPostId(params.id);
   }, [params.id]);
 
-  // console.log("ARticle",currentPost)
-  // let date = new Date();
-  // let getCreatedAt = date.toDateString();
-  // if (currentPost) {
-  //     date = new Date(currentPost.data.createdAt);
-  //     getCreatedAt = date.toDateString();
-  // }
   const changeFormatDate = (createdAt) => {
     let date = new Date(createdAt);
     return date.toDateString();
@@ -156,7 +149,7 @@ const DetailArticle = () => {
                       alt="avatar the writer"
                     />
                     <div className="row">
-                      <div className="col-lg-3 align-self-start">
+                      <div className="col align-self-start">
                         <h5>
                           {currentPost.data.user.first_name +
                             " " +
@@ -167,7 +160,7 @@ const DetailArticle = () => {
                     <div className="row">
                       <div className="col-lg-3 align-self-start post-detail-description">
                         <p>
-                          {currentPost.data.category.name} <FaCircle />{" "}
+                          {currentPost.data.category.name} <FaCircle className="ms-1 me-1"/>{" "}
                           {changeFormatDate(currentPost.data.createdAt)}
                         </p>
                       </div>
@@ -212,7 +205,7 @@ const DetailArticle = () => {
                               alt="avatar the writer"
                             />
                             <div className="row">
-                              <div className="col-lg-3 align-self-start justify-content-center pt-3">
+                              <div className="col align-self-start justify-content-center pt-3">
                                 <h5>
                                   {currentUser.first_name +
                                     " " +

@@ -14,8 +14,7 @@ const CreateArticle = () => {
 
     const { message } = useSelector(state => state.message);
     const { user: currentUser } = useSelector((state) => state.auth);
-    const categories = useSelector(state => state.category);
-    const dataCategories = categories.data;
+    const dataCategories = useSelector(state => state.category).data;
 
     const userId =  currentUser ? currentUser.id : 0;
     const [categoryId, setCategoryId] = useState('');

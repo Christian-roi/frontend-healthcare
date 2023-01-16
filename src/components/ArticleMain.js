@@ -9,8 +9,7 @@ import { Link } from 'react-router-dom';
 
 const API_URL = 'http://localhost:8000/';
 const ArticleMain = ({textHeadline,children}) => {
-    const categories = useSelector(state => state.category);
-    const dataCategories = categories.data;
+    const dataCategories = useSelector(state => state.category).data;
     const dispatch = useDispatch();
 
     const [categoryId, setCategoryId] = useState(null);
@@ -23,7 +22,7 @@ const ArticleMain = ({textHeadline,children}) => {
     const [allPost, setAllPost] = useState([]);
     const getAllPosts = async () => {
       postService.getAll(params).then(res => {
-        setAllPost(res.data);
+        setAllPost(res.data.data);
       }).catch(err => console.error(err));
     };
 
@@ -31,8 +30,6 @@ const ArticleMain = ({textHeadline,children}) => {
         dispatch(fetchCategories());
         getAllPosts();
     }, [dispatch]);
-
-    const posts = allPost.data;
 
     // console.log("INI CATEGORY",categories);
     const getByCategory = id => {
@@ -65,7 +62,7 @@ const ArticleMain = ({textHeadline,children}) => {
                 <div className='row'>
                     <div className='col-xs-12 col-sm-12 col-md-12 col-lg-6 '>
                       {
-                        posts ? posts.slice(0,1)?.map((post) => (
+                        allPost.length > 0 ? allPost.slice(0,1)?.map((post) => (
                           <div className="card h-100" key={post.id}>
                             <img src={API_URL+post.image} className="card-img-top" alt="..."/>
                             <div className="card-body">
@@ -97,7 +94,7 @@ const ArticleMain = ({textHeadline,children}) => {
                     <div className='col-xs-12 col-sm-12 col-md-12 col-lg-6 '>
                         <div className='row row-cols-1 row-cols-md-2 g-4'>
                           {
-                            posts ? posts.slice(1)?.map((post) => (
+                            allPost.length > 0 ? allPost.slice(1)?.map((post) => (
                               <div className="col">
                                 <div className="card h-100" key={post.id}>
                                   <img src={API_URL+post.image} className="card-img-top" alt="..."/>

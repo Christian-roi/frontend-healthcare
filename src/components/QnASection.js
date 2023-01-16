@@ -1,25 +1,36 @@
-import { FaRegBookmark } from "react-icons/fa";
+import moment from "moment/moment";
+import { FaCircle } from "react-icons/fa";
+import blankProfile from "../assets/blank-profile.png";
+import './QnASection.css';
 
-const QnASection = ({image, first_name, last_name, }) => {
+const QnASection = ({fullName, createdAt, title, content, children, bgColor }) => {
+    const dateTimeAgo = (createdAt) => {
+        return moment(new Date(createdAt)).fromNow();
+    };
     return (
-        <div>
-            <div className="row justify-content-end mt-4 mb-4">
-                <div className="col-lg-10 col-10" style={{textAlign:'left'}}>
+        <div className="qna-container">
+            <div className="row justify-content-end mt-4 mb-4 qna-section" style={bgColor}>
+                <div className="col mt-2">
                     <img src={blankProfile} className="rounded-circle float-start" width="50" height="50" alt="avatar the writer"/>
                     <div className="row">
-                        <div className="col-lg-3 align-self-start">
-                            <h5>{currentPost.data.user.first_name+" "+currentPost.data.user.last_name}</h5>
+                        <div className="col align-self-start">
+                            <h5 className="h-title">{title}</h5>
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-lg-3 align-self-start post-detail-description">
-                            <p>{currentPost.data.category.name} <FaCircle/> {changeFormatDate(currentPost.data.createdAt)}</p> 
+                        <div className="col align-self-start post-detail-description">
+                            <p className="h-name">{fullName} <FaCircle className="ms-1 me-1"/> {dateTimeAgo(createdAt)}</p> 
                         </div>
                     </div>
-                </div>
-                <div className="col-2">
-                    <FaRegBookmark className="ms-1 me-1"/>
-                    Save
+                    <div className="row mt-2">
+                        <div className="col align-self-start">
+                            <h5 className="mt-1 h-content">{content}</h5>
+                            <hr/>
+                        </div>
+                    </div>
+                    <div className="row mt-1">
+                        {children}
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,16 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import QnASection from "../components/QnASection";
+import questionService from "../services/question";
 
 const QnAs = () => {
-//   const { user: currentUser } = useSelector((state) => state.auth);
+  const [allQuestion, setAllQuestion] = useState([]);
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(0);
+  const [categoryId, setCategoryId] = useState(null);
+  const [searchQuery, setSearchQuery] = useState(null);
+  let params = {
+    limit : limit,
+    page: page,
+    categoryId: categoryId,
+    searchQuery: searchQuery
+  };
 
-//   if (!currentUser) {
-//     return <Navigate to="/login" />;
-//   }
+  const getAllQuestions = async () => {
+    questionService.getAll(params).then(res => {
+      setAllQuestion(res.data.data);
+    }).catch(err => console.error(err));
+  };
+
+  useEffect(() => {
+    getAllQuestions();
+    console.log(allQuestion)
+  },[]);
 
   return (
     <div>
@@ -52,7 +71,19 @@ const QnAs = () => {
             </div>
           </div>
           <div className="row">
-            
+            {
+              allQuestion.length > 0 ? allQuestion.map((question) => (
+                  <QnASection 
+                    fullName={question.fullName} 
+                    title={question.title} 
+                    content={question.content} 
+                    createdAt={question.createdAt} 
+                    bgColor={{backgroundColor: '#F4F4F4'}} 
+                  >
+                    <h5 className="view-replies pb-2">View {question.answers} replies</h5>
+                  </QnASection>
+              )) : ''
+            }
           </div>
         </div>
       </div>
