@@ -20,13 +20,10 @@ const ProfileBanner = (props) => {
         </div>
         <div className="col-12 col-md-6 col-lg-6 col-xl-6 justify-content-center text-center mt-5">
           <div className="hero-section">
-            <h1 className="hero-title">Ask the Doctor.</h1>
-            <p className="hero-text">
-              Ask a question and get a response from a doctor.
-            </p>
-            <Link to="/qnas" className="btn btn-auth mb-3">
-              Ask a Question
-            </Link>
+            <h1 className="hero-title py-2">We are here to help you.</h1>
+            <h4 className="hero-text">
+              Hello, {currentUser.first_name + " " + currentUser.last_name}!
+            </h4>
           </div>
         </div>
       </div>
