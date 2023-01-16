@@ -86,6 +86,9 @@ const Navbar = () => {
             )}
             {currentUser ? (
               <Fragment>
+                <Link className="nav-link active mx-3" to="/profile">
+                  Profile
+                </Link>
                 <Link to="/">
                   <button
                     className="btn btn-danger mx-3 text-white"

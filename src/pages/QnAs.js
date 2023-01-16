@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import QnASection from "../components/QnASection";
 import questionService from "../services/question";
+import QnABannerMain from "../components/QnABannerMain";
 
 const QnAs = () => {
   const [allQuestion, setAllQuestion] = useState([]);
@@ -34,12 +35,13 @@ const QnAs = () => {
   return (
     <div>
       <Navbar />
+      <QnABannerMain className="banner-grey" image="/qnamain.png" /> 
       <div className="container-fluid container-article">
-        <div className="row">
+        <div className="row mt-3 justify-content-start">
           <div className="col-lg-4 mt-4">
-              <h2>Ask the Doctor!</h2>
+              <h2 className="p-0">Ask the Doctor!</h2>
               <nav aria-label="breadcrumb">
-                  <ol className="breadcrumb navigate-menu">
+                  <ol className="breadcrumb navigate-menu text-start">
                       <li className="breadcrumb-item"><Link to={'/'}>Home</Link></li>
                       <li className="breadcrumb-item active" aria-current="page">QnA</li>
                   </ol>
