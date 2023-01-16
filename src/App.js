@@ -13,6 +13,7 @@ import Articles from './pages/Articles';
 import QnAs from './pages/QnAs';
 import DetailArticle from './pages/DetailArticle';
 import CreateArticle from './pages/CreateArticle';
+import Profile from './pages/Profile';
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/qnas" element={<QnAs />} />
           <Route path="/login" element={<LogIn />} />
           <Route path='/signup' element={<SignUp />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
     </div>
   );

@@ -5,6 +5,7 @@ import loginImage from '../assets/logInImage.png';
 import AuthLayout from '../components/AuthLayout';
 import { Navigate, Link, useNavigate } from 'react-router-dom';
 import { login } from '../redux/actions/auth';
+import Swal from 'sweetalert2';
 
 const LogIn = () => {
 
@@ -34,12 +35,26 @@ const LogIn = () => {
     const handleLogin = (e) => {
         e.preventDefault();
         setLoading(true);
+        if(email === "" || password === "" || email === null || password === null) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Please fill in all the fields!",
+            });
+            setLoading(false);
+            return;
+        }
         dispatch(login(email,password))
             .then(() => {
                 navigate('/');
                 window.location.reload();
             })
             .catch(() => {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: message,
+                });
                 setLoading(false);
             });
     };
@@ -50,8 +65,12 @@ const LogIn = () => {
 
     const checkLogin = (e) => {
         e.preventDefault();
-        if(email === "" || password === "") {
-            alert("Please fill all the fields");
+        if(email === "" || password === "" || email === null || password === null) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please fill in all fields!',
+            });
         } else {
             handleLogin();
         }
@@ -78,12 +97,12 @@ const LogIn = () => {
                             {eye ? <FaEye/> : <FaEyeSlash/>}
                         </span>
                     </div>
-                    <div className='mt-0 row justify-content-start remember-group'>
+                    {/* <div className='mt-0 row justify-content-start remember-group'>
                         <input className="col-1 ms-2" type="checkbox" value="" id="flexCheckDefault"/>
                         <label className="col-lg-4 col-8 mt-1" for="flexCheckDefault" style={{textAlign:'left'}}>
                             Remember Me
                         </label>
-                    </div>
+                    </div> */}
                     <button className='btn-auth mt-4 auth-action' style={{fontWeight:'700'}} onClick={handleLogin} disabled={loading}>
                         { loading && ( <span className="spinner-border spinner-border-sm"></span> ) } 
                         { loading && <span> Loading...</span> }

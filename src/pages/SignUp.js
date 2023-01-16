@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import signUpImage from "../assets/signUpImage.png";
 import AuthLayout from "../components/AuthLayout";
+import Swal from "sweetalert2";
 
 import { register } from "../redux/actions/auth";
 
@@ -59,15 +60,31 @@ const SignUp = () => {
       email === "" ||
       password === ""
     ) {
-      alert("Please fill out all fields");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please fill in all the fields!",
+      });
+      return;
     } else {
       dispatch(register(firstName, lastName, email, password))
         .then(() => {
           setSuccess(true);
-          alert("Sign up successful");
+          Swal.fire({
+            icon: "success",
+            title: "Success!",
+            text: "Your account has been created!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
           navigate("/login");
         })
         .catch(() => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: message,
+          });
           setSuccess(false);
         });
     }
@@ -147,13 +164,13 @@ const SignUp = () => {
           </form>
         )}
 
-        {message && (
+        {/* {message && (
           <div className="form-group">
             <div className="alert alert-danger" role="alert">
               {message}
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </AuthLayout>
   );

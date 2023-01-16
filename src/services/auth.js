@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8000/api/";
+const API_URL = "https://rose-graceful-september.glitch.me/api/";
 
 const signup = (firstName, lastName, email, password) => {
   return axios.post(API_URL + "signup", {

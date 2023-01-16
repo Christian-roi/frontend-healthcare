@@ -10,6 +10,12 @@
     clip-path: inset(0 -100vmax);
 }
 
+.banner-grey {
+    background-color: #D6E4E5;
+    box-shadow: 0 0 0 100vmax #D6E4E5;
+    clip-path: inset(0 -100vmax);
+}
+
 .hero-title{
     font-family: 'Roboto', sans-serif;
     font-style: normal;

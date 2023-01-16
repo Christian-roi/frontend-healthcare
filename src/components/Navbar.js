@@ -75,7 +75,7 @@ const Navbar = () => {
             ) : (
               <Fragment></Fragment>
             )} */}
-            {currentUser && currentUser.role === "Doctor" ? (
+            {/* {currentUser && currentUser.role === "Doctor" ? (
               <Fragment>
                 <Link className="nav-link active mx-3" to="/admin">
                   Admin
@@ -83,7 +83,7 @@ const Navbar = () => {
               </Fragment>
             ) : (
               <Fragment></Fragment>
-            )}
+            )} */}
             {currentUser ? (
               <Fragment>
                 <Link className="nav-link active mx-3" to="/profile">
