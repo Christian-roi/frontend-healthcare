@@ -53,7 +53,7 @@ const FacilityMain = () => {
                             </div>
                         </div>
                         <div className='col-lg-3'>
-                            <FaLongArrowAltRight className='mx-auto icon-arrow' onClick={() => toQnA()} />
+                            <FaLongArrowAltRight className='mx-auto icon-arrow' onClick={toQnA} />
                         </div>
                     </div>
                 </div>

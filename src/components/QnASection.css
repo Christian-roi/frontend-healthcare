@@ -1,4 +1,4 @@
-.qna-container {
+.qna-container, .filter-search-qna {
     padding-left: 10%;
     padding-right: 10%;
     text-align: left;
@@ -19,8 +19,17 @@
     font-size: 18px;
 }
 
+.page-link.active {
+    background-color: #915AA5;
+    border-color: #915AA5;
+}
+
+#message-text {
+    height: 150px;
+}
+
 @media only screen and (max-width:900px) {
-    .qna-container {
+    .qna-container, .filter-search-qna{
         padding: auto;
     }
 }

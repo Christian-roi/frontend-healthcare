@@ -9,6 +9,23 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar"
 import { createPost } from "../redux/actions/post";
 
+const modules = {
+    toolbar: [
+      [{ 'header': [1, 2, false] }],
+      ['bold', 'italic', 'underline','strike', 'blockquote'],
+      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+      ['link', 'image'],
+      ['clean']
+    ],
+};
+
+const formats = [
+    'header',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+    'list', 'bullet', 'indent',
+    'link', 'image'
+];
+
 const CreateArticle = () => {
     const dispatch = useDispatch();
 
@@ -73,23 +90,6 @@ const CreateArticle = () => {
         setImage('');
     };
 
-    const modules = {
-        toolbar: [
-          [{ 'header': [1, 2, false] }],
-          ['bold', 'italic', 'underline','strike', 'blockquote'],
-          [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-          ['link', 'image'],
-          ['clean']
-        ],
-      };
-    
-    const formats = [
-        'header',
-        'bold', 'italic', 'underline', 'strike', 'blockquote',
-        'list', 'bullet', 'indent',
-        'link', 'image'
-      ];
-
     const onChangeTitle  = e => {
         const title = e.target.value;
         setTitle(title);
@@ -97,7 +97,6 @@ const CreateArticle = () => {
     
     const onChangeCategoryId  = e => {
         const categoryId = e.target.value;
-        // console.log("Ini ID nya", categoryId);
         setCategoryId(categoryId);
     };
     

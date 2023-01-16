@@ -4,6 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
+  const textForSearch = "Search for articles";
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -31,8 +32,8 @@ const Banner = () => {
               <input
                 type="text"
                 className="form-control"
-                placeholder="Search for articles and QnA"
-                aria-label="Search for articles and QnA"
+                placeholder={textForSearch}
+                aria-label={textForSearch}
                 aria-describedby="button-addon2"
                 value={searchQuery}
                 onChange={onChangeSearch}
@@ -41,7 +42,7 @@ const Banner = () => {
                 className="btn btn-outline-secondary"
                 type="button"
                 id="button-addon2"
-                onClick={() => handleSearch()}
+                onClick={handleSearch}
               >
                 <FaSearch />
               </button>
