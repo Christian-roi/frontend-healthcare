@@ -44,7 +44,7 @@ const QnAs = () => {
 
   useEffect(() => {
     getAllQuestions();
-  },[page, searchQuery, allQuestion]);
+  },[page, searchQuery, categoryId]);
 
   const changePage = ({ selected }) => {
     setPage(selected);
@@ -128,11 +128,11 @@ const QnAs = () => {
           </div>
         </div>
         <div className="container">
-          <div className="d-grid gap-2 col-lg-4 mx-auto">
+          <div className="d-grid gap-2 col-lg-4 col-sm-10 mx-auto">
             <button className='btn btn-create-article' onClick={handleShow}>Ask the Doctor Now!</button>
           </div>
-          <div className="row mb-4 mt-3 filter-search-qna">
-            <div className="col-lg-6 mt-1">
+          <div className="row mb-4 mt-2 filter-search-qna">
+            <div className="col-lg-6 mt-2">
               <select onChange={onChangeCategoryId} className="form-select">
                   <option value='' selected>All Category</option>
                   {
@@ -142,7 +142,7 @@ const QnAs = () => {
                   }
               </select>
             </div>
-            <div className="col-lg-6 mt-1">
+            <div className="col-lg-6 mt-2">
               <div className="input-group">
                 <input
                   type="text"
@@ -186,8 +186,8 @@ const QnAs = () => {
           {
               notification && ( 
                 <ToastContainer position="middle-center">
-                  <Toast bg={success ? 'primary' : 'danger'} onClose={() => setNotification(false)} show={notification} delay={5000} autohide>
-                    <ToastHeader></ToastHeader>
+                  <Toast bg={success ? 'primary' : 'danger'} onClose={() => setNotification(false)} show={notification} delay={3000} autohide>
+                    <ToastHeader><strong className="me-auto">{success ? 'Success' : 'Failed'}</strong></ToastHeader>
                     <ToastBody>{message}</ToastBody>
                   </Toast>
                 </ToastContainer>

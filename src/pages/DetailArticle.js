@@ -10,7 +10,9 @@ import Footer from "../components/Footer";
 import Swal from "sweetalert2";
 import { addComment } from "../redux/actions/comment";
 
-const API_URL = "http://localhost:8000/";
+let API_URL;
+process.env.NODE_ENV === 'development' ?
+    API_URL = process.env.REACT_APP_DEV_API_URL : API_URL = process.env.REACT_APP_API_URL
 const DetailArticle = () => {
   const data = {};
   const [currentPost, setCurrentPost] = useState(data);
@@ -33,7 +35,7 @@ const DetailArticle = () => {
 
   const handleComment = (e) => {
     e.preventDefault();
-    if (comment === "") {
+    if (!comment) {
       Swal.fire({
         icon: "error",
         title: "Oops...",

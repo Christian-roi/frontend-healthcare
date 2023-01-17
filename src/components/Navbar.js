@@ -57,7 +57,7 @@ const Navbar = () => {
             </Link>
             {/* <Link className="nav-link mx-3" to="/login">Login</Link> */}
             {/* If currentUser.roleid = 1 */}
-            {currentUser && currentUser.role === "Admin" ? (
+            {currentUser?.role === "Admin" ? (
               <Fragment>
                 <Link className="nav-link active mx-3" to="/admin">
                   Admin

@@ -31,6 +31,7 @@ const CreateArticle = () => {
 
     const { message } = useSelector(state => state.message);
     const { user: currentUser } = useSelector((state) => state.auth);
+    const isEditorOrDoctor = currentUser && ["Editor","Doctor"].includes(currentUser.role);
     const dataCategories = useSelector(state => state.category).data;
 
     const userId =  useMemo(() => currentUser?.id ?? 0, [currentUser?.id]);
@@ -57,7 +58,6 @@ const CreateArticle = () => {
             reader.readAsDataURL(file);
             reader.onload = () => {
                 baseURL = reader.result;
-                // console.log(baseURL);
                 setImage(baseURL);
                 resolve(baseURL);
             };
@@ -65,14 +65,12 @@ const CreateArticle = () => {
     };
 
     const handleFileInputChange = e => {
-        // console.log(e.target.files[0]);
         let { file } = imageEncode;
 
         file = e.target.files[0];
 
         getBase64(file).then(result => {
             file["base64"] = result;
-            // console.log("File Is", file);
             setImageEncode({
                 base64URL: result,
                 file
@@ -135,7 +133,7 @@ const CreateArticle = () => {
         handleCreatePost();
     };
 
-    if (currentUser && (currentUser.role === "Editor" || currentUser.role === "Doctor")) {
+    if (isEditorOrDoctor) {
         return (
             <div>
                 <Navbar/>

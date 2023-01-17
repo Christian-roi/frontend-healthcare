@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
@@ -9,9 +9,12 @@ import Footer from "../components/Footer";
 import postService from "../services/post";
 import CardArticle from "../components/CardArticle";
 
-const API_URL = 'http://localhost:8000/';
+let API_URL;
+process.env.NODE_ENV === 'development' ?
+    API_URL = process.env.REACT_APP_DEV_API_URL : API_URL = process.env.REACT_APP_API_URL
 const Articles = () => {
     const { user: currentUser } = useSelector((state) => state.auth);
+    const isEditorOrDoctor = currentUser && ["Editor","Doctor"].includes(currentUser.role);
     const dataCategories = useSelector(state => state.category).data;
     
     const navigate = useNavigate();
@@ -45,26 +48,12 @@ const Articles = () => {
         setTimeout(() => {
             postService.getAll(params).then((res) => {
                 if (categoryId) {
-                    // console.log("PAGE : ",page)
-                    // console.log("Limit : ",limit)
-                    // console.log("ALL POST : ",allPost)
-                    // console.log("Category : ",categoryId)
-                    setPage(null);
-                    setLimit(null);
-                    // const newPage = page + 1;
-                    // console.log(newPage)
-                    // const thePost = res.data.data;
-                    setAllPost(res.data.data) 
-                    // setPage(newPage)
-                    if (res.data.data.length === 0) {
-                        setNoData(true);
-                    }
+                    setAllPost(res.data.data)
+                    setNoData(true);
                 } else {
-                    // console.log("SEMUA",allPost)
-                        const newPage = page + 1;
+                    const newPage = page + 1;
                     const newList = allPost.concat(res.data.data);
                     setAllPost(newList);    
-                    // console.log(newList)
                     setPage(newPage);
                     if (res.data.data.length === 0) {
                         setNoData(true);
@@ -80,13 +69,14 @@ const Articles = () => {
 
     useEffect(() => {
         getAllPosts();
-    }, []);
+    }, [categoryId , limit]);
 
-    // MASIH ADA BUG
-    const getByCategory = id => {
+    const getByCategory =  useCallback((id) => {
         setCategoryId(id);
+        setPage(null);
+        setLimit(null);
         getAllPosts()
-    }
+    },[])
 
     return (
         <div>
@@ -95,7 +85,6 @@ const Articles = () => {
                 <div className="row">
                     <div className="col-lg-4 mt-4">
                         <h2>Article Choice</h2>
-                        {/* <Link to={'/'} style={{textAlign: 'left'}}>Home</Link> */}
                         <nav aria-label="breadcrumb">
                             <ol className="breadcrumb navigate-menu">
                                 <li className="breadcrumb-item"><Link to={'/'}>Home</Link></li>
@@ -104,7 +93,7 @@ const Articles = () => {
                         </nav>
                     </div>
                     {
-                        currentUser && (currentUser.role === "Editor" || currentUser.role === "Doctor") ?
+                        isEditorOrDoctor ?
                             <div>
                                 <ArticleMain textHeadline={'Read Your Best Writings Here'}>
                                     <button 
@@ -133,7 +122,7 @@ const Articles = () => {
                             :
                             ''
                     }
-                        <div className="col-lg-8">
+                        <div className="col-lg-8 order-lg-1 order-2">
                             <h2 style={{textAlign:'left'}}>Water your mind.</h2>
                             {
                                 allPost ? allPost?.map((post) => (
@@ -148,7 +137,7 @@ const Articles = () => {
                             {loading ?  <div className="text-center">loading data ...</div> : "" }
                             {noData ? <div className="text-center">no data anymore ...</div> : "" } 
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-lg-4 order-lg-2 order-1">
                             <h2 style={{textAlign:'left'}}>Discover more</h2>
                             <ul className='list-inline mt-4'>
                                 {

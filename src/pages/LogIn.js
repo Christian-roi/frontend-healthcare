@@ -35,7 +35,7 @@ const LogIn = () => {
     const handleLogin = (e) => {
         e.preventDefault();
         setLoading(true);
-        if(email === "" || password === "" || email === null || password === null) {
+        if(!email || !password) {
             Swal.fire({
                 icon: "error",
                 title: "Oops...",

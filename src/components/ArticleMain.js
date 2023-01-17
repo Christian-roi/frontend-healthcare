@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaRegBookmark, FaShare } from 'react-icons/fa';
 import { fetchCategories } from '../redux/actions/category';
-import randomImage from '../assets/blank-profile.png';
 import './ArticleMain.css';
 import postService from '../services/post';
 import { Link } from 'react-router-dom';
 
-const API_URL = 'http://localhost:8000/';
+let API_URL;
+process.env.NODE_ENV === 'development' ?
+    API_URL = process.env.REACT_APP_DEV_API_URL : API_URL = process.env.REACT_APP_API_URL
 const ArticleMain = ({textHeadline,children}) => {
     const dataCategories = useSelector(state => state.category).data;
     const dispatch = useDispatch();
@@ -31,7 +32,6 @@ const ArticleMain = ({textHeadline,children}) => {
         getAllPosts();
     }, [dispatch]);
 
-    // console.log("INI CATEGORY",categories);
     const getByCategory = id => {
       setCategoryId(id);
       getAllPosts()
