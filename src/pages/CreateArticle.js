@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { BsCamera } from "react-icons/bs";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
@@ -33,7 +33,7 @@ const CreateArticle = () => {
     const { user: currentUser } = useSelector((state) => state.auth);
     const dataCategories = useSelector(state => state.category).data;
 
-    const userId =  currentUser ? currentUser.id : 0;
+    const userId =  useMemo(() => currentUser?.id ?? 0, [currentUser?.id]);
     const [categoryId, setCategoryId] = useState('');
     const [title, setTitle] = useState('');
     const [image, setImage] = useState('');

@@ -8,7 +8,6 @@ const AuthLayout = ({image, children, textAuth, linkAuth, linkText}) => {
       navigate('/')
     };
     return (
-        // <div className='container-fluid'>
             <div className='row row-auth'>
                 <div className='col-lg-6 d-none d-lg-block mt-4 intro-section'>
                     <img src={image} alt="logo" className="mx-auto"/>
@@ -27,7 +26,6 @@ const AuthLayout = ({image, children, textAuth, linkAuth, linkText}) => {
                   </div>
                 </div>
             </div>
-        // </div>
     )
 }
 
