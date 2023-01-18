@@ -5,6 +5,10 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   SET_MESSAGE,
+  FETCH_USER_IMAGES_FAIL,
+  FETCH_USER_IMAGES_SUCCESS,
+  DELETE_USER_IMAGE_FAIL,
+  DELETE_USER_IMAGE_SUCCESS,  
 } from "./types";
 
 import AuthService from "../../services/auth";
@@ -85,4 +89,60 @@ export const logout = () => (dispatch) => {
   dispatch({
     type: LOGOUT,
   });
+};
+
+export const insertImage = (image) => (dispatch) => {
+  return AuthService.insertImage(image).then(
+    (response) => {
+      dispatch({
+        type: SET_MESSAGE,
+        payload: response.data.message,
+      });
+
+      return Promise.resolve();
+    },
+    (error) => {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      dispatch({
+        type: SET_MESSAGE,
+        payload: message,
+      });
+
+      return Promise.reject();
+    }
+  );
+};
+
+export const deleteImage = (image) => (dispatch) => {
+  return AuthService.deleteImage(image).then(
+    (response) => {
+      dispatch({
+        type: SET_MESSAGE,
+        payload: response.data.message,
+      });
+
+      return Promise.resolve();
+    },
+    (error) => {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      dispatch({
+        type: SET_MESSAGE,
+        payload: message,
+      });
+
+      return Promise.reject();
+    }
+  );
 };

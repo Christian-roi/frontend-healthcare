@@ -1,4 +1,5 @@
 import axios from "axios";
+import api from '../api';
 
 let url;
 process.env.NODE_ENV === 'development' ?
@@ -31,10 +32,29 @@ const logout = () => {
     localStorage.removeItem("user");
 };
 
+const insertImage = (image) => {
+    return axios.post(API_URL + "addImage/" + JSON.parse(localStorage.getItem('user')).id, {
+        image: image,
+    });
+};
+
+const deleteImage = (image) => {
+    return axios.delete(API_URL + "deleteImage/" + JSON.parse(localStorage.getItem('user')).id, {
+        image: image,
+    });
+};
+
+const getCurrentUser = () => {
+    return axios.get(API_URL + "getuserinfo/" + JSON.parse(localStorage.getItem('user')).id);
+};
+
 const authService = {
     signup,
     login,
     logout,
+    insertImage,
+    deleteImage,
+    getCurrentUser,
 };
 
 export default authService;

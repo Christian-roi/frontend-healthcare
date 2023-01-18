@@ -104,6 +104,8 @@ const DetailArticle = () => {
     return date.toDateString();
   };
 
+  // console.log(currentPost.data.user.image);
+
   return (
     <div>
       <Navbar />
@@ -144,7 +146,7 @@ const DetailArticle = () => {
                     style={{ textAlign: "left" }}
                   >
                     <img
-                      src={blankProfile}
+                      src={ currentPost.data.user.image ? API_URL + currentPost.data.user.image : blankProfile}
                       className="rounded-circle float-start"
                       width="50"
                       height="50"
@@ -200,7 +202,7 @@ const DetailArticle = () => {
                             style={{ textAlign: "left" }}
                           >
                             <img
-                              src={blankProfile}
+                              src={currentUser.image ? API_URL + currentUser.image : blankProfile}
                               className="rounded-circle float-start"
                               width="50"
                               height="50"
@@ -277,7 +279,7 @@ const DetailArticle = () => {
                                     style={{ textAlign: "left" }}
                                   >
                                     <img
-                                      src={blankProfile}
+                                      src={comment.user.image ? API_URL + comment.user.image : blankProfile}
                                       className="rounded-circle float-start"
                                       width="50"
                                       height="50"
