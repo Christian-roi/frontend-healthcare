@@ -152,8 +152,8 @@ const Admin = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {categories.map((category, index) => (
-                      <tr key={index} className="align-middle">
+                    { categories ? categories.map((category, index) => (
+                        <tr key={index} className="align-middle">
                         <th scope="row">{index + 1}</th>
                         <td>{category.name}</td>
                         <td>
@@ -162,7 +162,11 @@ const Admin = () => {
                           </button>
                         </td>
                       </tr>
-                    ))}
+                    )) : (
+                        <tr>
+                            <td colSpan="3" className="text-center">No Category</td>
+                        </tr>
+                    ) }
                   </tbody>
                 </table>
               </div>
