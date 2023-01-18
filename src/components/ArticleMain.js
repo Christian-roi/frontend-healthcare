@@ -5,6 +5,7 @@ import { fetchCategories } from '../redux/actions/category';
 import './ArticleMain.css';
 import postService from '../services/post';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 let API_URL;
 process.env.NODE_ENV === 'development' ?
@@ -24,7 +25,13 @@ const ArticleMain = ({textHeadline,children}) => {
     const getAllPosts = async () => {
       postService.getAll(params).then(res => {
         setAllPost(res.data.data);
-      }).catch(err => console.error(err));
+      }).catch((err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Something went wrong',
+          text: err
+        });
+      });
     };
 
     useEffect(() => {

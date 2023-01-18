@@ -5,7 +5,7 @@ const CardArticle = ({postId, title, image, content}) => {
     return (
         <div className="card mb-4">
             <div className="row g-0">
-                <div className="col-md-4">
+                <div className="col-md-4 mt-3">
                     <img src={image} className="img-fluid rounded-start" alt="Article Thumb" />
                 </div>
                 <div className="col-md-8">

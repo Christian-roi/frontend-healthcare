@@ -91,7 +91,13 @@ const DetailArticle = () => {
       .then((res) => {
         setCurrentPost(res.data);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Something went wrong',
+          text: err
+        });
+      });
   };
 
   useEffect(() => {

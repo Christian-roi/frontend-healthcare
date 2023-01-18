@@ -8,6 +8,7 @@ import { FaPlus } from "react-icons/fa";
 import Footer from "../components/Footer";
 import postService from "../services/post";
 import CardArticle from "../components/CardArticle";
+import Swal from "sweetalert2";
 
 let API_URL;
 process.env.NODE_ENV === 'development' ?
@@ -60,7 +61,11 @@ const Articles = () => {
                     }
                 }
             }).catch((err) => { 
-                console.error(err)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Something went wrong',
+                    text: err
+                });
             }).finally(() => {
                 setLoading(false);
             })

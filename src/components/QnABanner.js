@@ -1,11 +1,10 @@
 import React from "react";
 import "./Banner.css";
 import "./Navbar.css";
-import { Link } from "react-router-dom";
 
 const QnABanner = (props) => {
   return (
-    <div className="container banner-qna">
+    <div className={`container ${props.className}`}>
       <div className="row">
         <div className="col-12 col-md-6 col-lg-6 col-xl-6 justify-content-center text-center">
           <img
@@ -21,9 +20,6 @@ const QnABanner = (props) => {
             <p className="hero-text">
                 Ask a question and get a response from a doctor.
             </p>
-            <Link to="/qnas" className="btn btn-auth mb-3">
-                Ask a Question
-            </Link>
           </div>
         </div>
       </div>

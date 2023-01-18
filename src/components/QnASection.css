@@ -28,6 +28,10 @@
     height: 150px;
 }
 
+.link {
+    cursor: pointer;
+}
+
 @media only screen and (max-width:900px) {
     .qna-container, .filter-search-qna{
         padding: auto;

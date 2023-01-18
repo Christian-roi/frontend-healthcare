@@ -2,16 +2,18 @@ import React, { useEffect, useMemo, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { FaSearch } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import QnASection from "../components/QnASection";
 import questionService from "../services/question";
 import QnABannerMain from "../components/QnABannerMain";
 import { Modal, ModalBody, ModalFooter, ModalHeader, ModalTitle, Toast, ToastBody, ToastContainer, ToastHeader } from "react-bootstrap";
+import Swal from "sweetalert2";
 
 
 const QnAs = () => {
+  const navigate = useNavigate();
   const { user: currentUser } = useSelector((state) => state.auth);
   const dataCategories = useSelector(state => state.category).data;
   
@@ -25,7 +27,7 @@ const QnAs = () => {
   const [categoryId, setCategoryId] = useState(null);
   const [searchQuery, setSearchQuery] = useState(null);
   const [keyword, setKeyword] = useState("");
-  
+
   let params = {
     limit : limit,
     page: page,
@@ -39,7 +41,13 @@ const QnAs = () => {
       setPage(res.data.page);
       setPages(res.data.totalPage);
       setRows(res.data.totalRows);
-    }).catch(err => console.error(err));
+    }).catch((err) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Something went wrong',
+        text: err
+      });
+    });
   };
 
   useEffect(() => {
@@ -67,10 +75,12 @@ const QnAs = () => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => { 
+    currentUser ? setShow(true) : navigate('/login');
+  };
 
   const [notification, setNotification] = useState(false);
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState('');
   const userId =  useMemo(() => currentUser?.id ?? 0, [currentUser?.id]);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -96,6 +106,7 @@ const QnAs = () => {
       handleClose()
       setTitle('');
       setContent('');
+      setCategoryId(null)
       setMessage(res.data.message);
       setSuccess(true);
     }).catch((error) => {
@@ -170,12 +181,15 @@ const QnAs = () => {
               allQuestion.length > 0 ? allQuestion.map((question) => (
                   <QnASection 
                     fullName={question.fullName} 
+                    image={question.image}
                     title={question.title} 
                     content={question.content.length > 70 ? question.content.substring(0,70)+"..." : question.content} 
                     createdAt={question.createdAt} 
                     bgColor={{backgroundColor: '#F4F4F4'}} 
                   >
-                    <h5 className="view-replies pb-2">View {question.answers} replies</h5>
+                    <h5 className="view-replies pb-2 link" onClick={() => navigate('/qnas/'+question.id)}>
+                      View {question.answers} replies
+                    </h5>
                   </QnASection>
               )) : ''
             }
@@ -185,7 +199,7 @@ const QnAs = () => {
           </div>
           {
               notification && ( 
-                <ToastContainer position="middle-center">
+                <ToastContainer position="top-end" className="position-fixed p-3">
                   <Toast bg={success ? 'primary' : 'danger'} onClose={() => setNotification(false)} show={notification} delay={3000} autohide>
                     <ToastHeader><strong className="me-auto">{success ? 'Success' : 'Failed'}</strong></ToastHeader>
                     <ToastBody>{message}</ToastBody>

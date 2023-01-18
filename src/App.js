@@ -14,6 +14,7 @@ import QnAs from './pages/QnAs';
 import DetailArticle from './pages/DetailArticle';
 import CreateArticle from './pages/CreateArticle';
 import Profile from './pages/Profile';
+import DetailQnA from './pages/DetailQnA';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/articles" element={<Articles />} />
           <Route path="/detail-article/:id" element={<DetailArticle />} />
           <Route path="/qnas" element={<QnAs />} />
+          <Route path='/qnas/:id' element={<DetailQnA />} />
           <Route path="/login" element={<LogIn />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path="/profile" element={<Profile />} />

@@ -10,7 +10,7 @@ const QnABannerMain = (props) => {
             props for banner color grey = "banner-grey"  
          */}
       <div className="row">
-        <div className="col-12 col-md-6 col-lg-6 col-xl-6 justify-content-center text-center">
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6 justify-content-center text-center mt-3">
           <img
             src={process.env.PUBLIC_URL + `${props.image}`}
             // for main qna = "/qnamain.png" and for qna detail = "/qnadetail.png"
@@ -19,7 +19,7 @@ const QnABannerMain = (props) => {
             width="60%"
           />
         </div>
-        <div className="col-12 col-md-6 col-lg-6 col-xl-6 justify-content-center text-center mt-3">
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6 justify-content-center text-center mt-2">
           <div className="hero-section mt-5">
             <h1 className="hero-title">Ask the Doctor.</h1>
             <p className="hero-text">

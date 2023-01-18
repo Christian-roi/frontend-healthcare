@@ -76,7 +76,11 @@ const CreateArticle = () => {
                 file
             });
         }).catch(err => {
-            console.error(err);
+            Swal.fire({
+                icon: 'error',
+                title: 'Something went wrong',
+                text: err
+            });
         });
 
         setImageEncode({
