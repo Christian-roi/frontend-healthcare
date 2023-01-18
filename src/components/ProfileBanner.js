@@ -20,7 +20,7 @@ const ProfileBanner = (props) => {
         </div>
         <div className="col-12 col-md-6 col-lg-6 col-xl-6 justify-content-center text-center mt-5">
           <div className="hero-section">
-            <h1 className="hero-title py-2">We are here to help you.</h1>
+            <h1 className="hero-title py-2">{props.title}</h1>
             <h4 className="hero-text">
               Hello, {currentUser.first_name + " " + currentUser.last_name}!
             </h4>
