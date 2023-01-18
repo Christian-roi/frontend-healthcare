@@ -4,6 +4,7 @@ const user = JSON.parse(localStorage.getItem('user'));
 
 export default axios.create({
   baseURL: "https://rose-graceful-september.glitch.me/",
+  // baseURL: "http://localhost:8000",
   headers: {
     "Access-Control-Allow-Origin": "*",
     Accept: "application/json",
