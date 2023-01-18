@@ -9,8 +9,8 @@ const QnASection = ({fullName, createdAt, title, content, children, bgColor }) =
     };
     return (
         <div className="qna-container">
-            <div className="row justify-content-end mt-3 mb-4 qna-section" style={bgColor}>
-                <div className="col mt-2">
+            <div className="row justify-content-end mt-1 mb-4 qna-section" style={bgColor}>
+                <div className="col mt-3">
                     <img src={blankProfile} className="rounded-circle float-start" width="50" height="50" alt="avatar the writer"/>
                     <div className="row">
                         <div className="col align-self-start">

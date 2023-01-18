@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { BsCamera } from "react-icons/bs";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
@@ -9,14 +9,32 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar"
 import { createPost } from "../redux/actions/post";
 
+const modules = {
+    toolbar: [
+      [{ 'header': [1, 2, false] }],
+      ['bold', 'italic', 'underline','strike', 'blockquote'],
+      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+      ['link', 'image'],
+      ['clean']
+    ],
+};
+
+const formats = [
+    'header',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+    'list', 'bullet', 'indent',
+    'link', 'image'
+];
+
 const CreateArticle = () => {
     const dispatch = useDispatch();
 
     const { message } = useSelector(state => state.message);
     const { user: currentUser } = useSelector((state) => state.auth);
+    const isEditorOrDoctor = currentUser && ["Editor","Doctor"].includes(currentUser.role);
     const dataCategories = useSelector(state => state.category).data;
 
-    const userId =  currentUser ? currentUser.id : 0;
+    const userId =  useMemo(() => currentUser?.id ?? 0, [currentUser?.id]);
     const [categoryId, setCategoryId] = useState('');
     const [title, setTitle] = useState('');
     const [image, setImage] = useState('');
@@ -40,7 +58,6 @@ const CreateArticle = () => {
             reader.readAsDataURL(file);
             reader.onload = () => {
                 baseURL = reader.result;
-                // console.log(baseURL);
                 setImage(baseURL);
                 resolve(baseURL);
             };
@@ -48,14 +65,12 @@ const CreateArticle = () => {
     };
 
     const handleFileInputChange = e => {
-        // console.log(e.target.files[0]);
         let { file } = imageEncode;
 
         file = e.target.files[0];
 
         getBase64(file).then(result => {
             file["base64"] = result;
-            // console.log("File Is", file);
             setImageEncode({
                 base64URL: result,
                 file
@@ -73,23 +88,6 @@ const CreateArticle = () => {
         setImage('');
     };
 
-    const modules = {
-        toolbar: [
-          [{ 'header': [1, 2, false] }],
-          ['bold', 'italic', 'underline','strike', 'blockquote'],
-          [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-          ['link', 'image'],
-          ['clean']
-        ],
-      };
-    
-    const formats = [
-        'header',
-        'bold', 'italic', 'underline', 'strike', 'blockquote',
-        'list', 'bullet', 'indent',
-        'link', 'image'
-      ];
-
     const onChangeTitle  = e => {
         const title = e.target.value;
         setTitle(title);
@@ -97,7 +95,6 @@ const CreateArticle = () => {
     
     const onChangeCategoryId  = e => {
         const categoryId = e.target.value;
-        // console.log("Ini ID nya", categoryId);
         setCategoryId(categoryId);
     };
     
@@ -136,7 +133,7 @@ const CreateArticle = () => {
         handleCreatePost();
     };
 
-    if (currentUser && (currentUser.role === "Editor" || currentUser.role === "Doctor")) {
+    if (isEditorOrDoctor) {
         return (
             <div>
                 <Navbar/>

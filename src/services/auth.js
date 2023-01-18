@@ -1,7 +1,9 @@
 import axios from "axios";
 
-const API_URL = "https://rose-graceful-september.glitch.me/api/";
-// const API_URL = "http://localhost:8000/api/";
+let url;
+process.env.NODE_ENV === 'development' ?
+    url = process.env.REACT_APP_DEV_API_URL : url = process.env.REACT_APP_API_URL
+const API_URL = `${url}api/`;
 
 const signup = (firstName, lastName, email, password) => {
   return axios.post(API_URL + "signup", {

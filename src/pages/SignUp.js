@@ -55,10 +55,10 @@ const SignUp = () => {
   const handleSignUp = (e) => {
     e.preventDefault();
     if (
-      firstName === "" ||
-      lastName === "" ||
-      email === "" ||
-      password === ""
+      !firstName ||
+      !lastName ||
+      !email ||
+      !password
     ) {
       Swal.fire({
         icon: "error",

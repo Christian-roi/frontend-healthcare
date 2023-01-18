@@ -19,7 +19,7 @@ const QnABannerMain = (props) => {
             width="60%"
           />
         </div>
-        <div className="col-12 col-md-6 col-lg-6 col-xl-6 justify-content-center text-center mt-5">
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6 justify-content-center text-center mt-3">
           <div className="hero-section mt-5">
             <h1 className="hero-title">Ask the Doctor.</h1>
             <p className="hero-text">
