@@ -8,6 +8,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
+import Admin from './pages/Admin';
 // import Navbar from './components/Navbar';
 import Articles from './pages/Articles';
 import QnAs from './pages/QnAs';
@@ -31,6 +32,7 @@ function App() {
           <Route path="/login" element={<LogIn />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
     </div>
   );

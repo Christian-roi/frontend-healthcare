@@ -108,7 +108,7 @@ const Profile = () => {
   return (
     <>
       <Navbar />
-      <ProfileBanner />
+      <ProfileBanner title="We are here to help you." />
       <div className="container">
         <div className="row">
           <div className="col-md-4 col-sm-12">

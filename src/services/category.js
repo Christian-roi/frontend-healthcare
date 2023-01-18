@@ -18,11 +18,16 @@ const remove = id => {
     return api.delete(`${url}/${id}`);
 };
 
+const getAllCategories = () => {
+    return api.get('/api/getallcat');
+};
+
 const categoryService = {
     getAll,
     create,
     update,
-    remove
+    remove,
+    getAllCategories
 };
 
 export default categoryService;
