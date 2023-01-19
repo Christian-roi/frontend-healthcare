@@ -32,6 +32,13 @@
     cursor: pointer;
 }
 
+.answer-field {
+    border: none; 
+    background-color: #f4f4f4;
+    height: 100px;
+    width: 100%;
+}
+
 @media only screen and (max-width:900px) {
     .qna-container, .filter-search-qna{
         padding: auto;

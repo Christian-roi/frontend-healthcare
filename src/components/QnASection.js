@@ -6,7 +6,7 @@ import './QnASection.css';
 let API_URL;
 process.env.NODE_ENV === 'development' ?
     API_URL = process.env.REACT_APP_DEV_API_URL : API_URL = process.env.REACT_APP_API_URL
-const QnASection = ({fullName, image, createdAt, title, content, children, bgColor }) => {
+const QnASection = ({fullName, image, createdAt, title, content, children, bgColor, }) => {
     const dateTimeAgo = (createdAt) => {
         return moment(new Date(createdAt)).fromNow();
     };

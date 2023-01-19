@@ -303,8 +303,6 @@ const DetailArticle = () => {
                                     <div className="row">
                                       <div className="col-lg-3 align-self-start post-detail-description">
                                         <p>
-                                          {currentPost.data.category.name}{" "}
-                                          <FaCircle />{" "}
                                           {changeFormatDate(comment.createdAt)}
                                         </p>
                                       </div>
