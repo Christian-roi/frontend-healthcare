@@ -9,6 +9,7 @@ import blankProfile from "../assets/blank-profile.png";
 import Footer from "../components/Footer";
 import Swal from "sweetalert2";
 import { addComment } from "../redux/actions/comment";
+import AuthService from "../services/auth";
 
 let API_URL;
 process.env.NODE_ENV === 'development' ?
@@ -19,6 +20,13 @@ const DetailArticle = () => {
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
   const params = useParams();
+
+    const [user, setUser] = useState([]);
+
+    const getUser = async (id) => {
+      const response = await AuthService.getCurrentUser(id);
+      setUser(response.data);
+    };
 
   const { user: currentUser } = useSelector((state) => state.auth);
 
@@ -103,6 +111,7 @@ const DetailArticle = () => {
   useEffect(() => {
     getPost(params.id);
     getCommentByPostId(params.id);
+    getUser(currentUser.id);
   }, [params.id]);
 
   const changeFormatDate = (createdAt) => {
@@ -208,7 +217,7 @@ const DetailArticle = () => {
                             style={{ textAlign: "left" }}
                           >
                             <img
-                              src={currentUser.image ? API_URL + currentUser.image : blankProfile}
+                              src= {user.image ? API_URL + user.image : blankProfile}
                               className="rounded-circle float-start"
                               width="50"
                               height="50"
