@@ -1,6 +1,8 @@
 import React from "react";
 import "./Banner.css";
 import "./Navbar.css";
+import "./QnABanner.css";
+import { Link } from "react-router-dom";
 
 const QnABanner = (props) => {
   return (
@@ -18,8 +20,11 @@ const QnABanner = (props) => {
           <div className="hero-section">
             <h1 className="hero-title">Ask the Doctor.</h1>
             <p className="hero-text">
-                Ask a question and get a response from a doctor.
+              Ask a question and get a response from a doctor.
             </p>
+            <Link to="/qnas" className="btn btn-create-article">
+              Ask a Question
+            </Link>
           </div>
         </div>
       </div>
