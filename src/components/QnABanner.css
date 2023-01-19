@@ -3,3 +3,9 @@
         box-shadow: 0 0 0 100vmax #D9D9D9;
         clip-path: inset(0 -100vmax);
 }
+
+.banner-qna {
+        background-color: #CB997E;
+        box-shadow: 0 0 0 100vmax #CB997E;
+        clip-path: inset(0 -100vmax);
+}
