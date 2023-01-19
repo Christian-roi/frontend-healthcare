@@ -111,7 +111,9 @@ const DetailArticle = () => {
   useEffect(() => {
     getPost(params.id);
     getCommentByPostId(params.id);
-    getUser(currentUser.id);
+    if (currentUser) {
+      getUser(currentUser.id);
+    }
   }, [params.id]);
 
   const changeFormatDate = (createdAt) => {
