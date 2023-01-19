@@ -119,7 +119,7 @@ const Profile = () => {
                   <div className="col-md-3 col-sm-12">
                     <img
                       src={
-                        user.image ? `${API_URL}/${user.image}` : blankProfile
+                        user.image ? `${API_URL}${user.image}` : blankProfile
                       }
                       alt="profile"
                       className="img-fluid rounded"

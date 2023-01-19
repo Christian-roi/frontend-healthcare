@@ -3,12 +3,15 @@ import { FaRegBookmark, FaShare } from "react-icons/fa";
 
 const CardArticle = ({ postId, title, image, content }) => {
 
+    // get the current url
+    const url = "http://localhost:3000/detail-article/" + postId;
+
     const Share = () => {
         if (navigator.share) {
             navigator.share({
                 title: 'Web Share API Demo',
                 text: 'Check out Web Share API!',
-                url: 'https://web.dev/web-share/',
+                url: url,
             })
                 .then(() => console.log('Successful share'))
                 .catch((error) => console.log('Error sharing', error));
