@@ -44,6 +44,24 @@ const ArticleMain = ({textHeadline,children}) => {
       getAllPosts()
     }
 
+    let url = "https://healthhub.vercel.app/detail-article/" + allPost[0]?.id;
+
+    const Share = () => {
+      if (navigator.share) {
+        navigator
+          .share({
+            title: "Web Share API Demo",
+            text: "Check out Web Share API!",
+            url: url,
+          })
+          .then(() => console.log("Successful share"))
+          .catch((error) => console.log("Error sharing", error));
+      } else {
+        alert("Web Share API is not supported.");
+      }
+    };
+
+
     return (
         <div className="main-article">
             <h2 className="mt-5">{textHeadline}</h2>
@@ -89,7 +107,7 @@ const ArticleMain = ({textHeadline,children}) => {
                                 <div className='icon-card'>
                                   <div className="row justify-content-between">
                                     <div className="col-4"><FaRegBookmark/> Save</div>
-                                    <div className="col-2" style={{textAlign: 'right'}}><FaShare/> </div>
+                                    <div className="col-2" style={{textAlign: 'right'}}><FaShare onClick={Share}/></div>
                                   </div>                              
                                 </div>
                               </p>
@@ -122,7 +140,7 @@ const ArticleMain = ({textHeadline,children}) => {
                                       <div className='icon-card'>
                                         <div className="row justify-content-between">
                                           <div className="col-4"><FaRegBookmark/> Save</div>
-                                          <div className="col-2" style={{textAlign: 'right'}}><FaShare/> </div>
+                                          <div className="col-2" style={{textAlign: 'right'}}><FaShare onClick={Share}/></div>
                                         </div>                              
                                       </div>
                                     </p>

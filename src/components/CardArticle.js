@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { FaRegBookmark, FaShare } from "react-icons/fa";
 
-const CardArticle = ({ postId, title, image, content }) => {
 
+const CardArticle = ({ postId, title, image, content }) => {
     // get the current url
-    const url = "http://localhost:3000/detail-article/" + postId;
+    let url = "https://healthhub.vercel.app/detail-article/" + postId;
 
     const Share = () => {
         if (navigator.share) {
