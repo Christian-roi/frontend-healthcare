@@ -28,7 +28,7 @@ export const actionArchive = data => async dispatch => {
         });
 
         return Promise.resolve(res.data);
-    } catch (error) {
+    } catch (err) {
         return Promise.reject(err);
     }
 }

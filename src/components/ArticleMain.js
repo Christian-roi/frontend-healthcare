@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaRegBookmark, FaShare } from 'react-icons/fa';
 import { fetchCategories } from '../redux/actions/category';
@@ -6,16 +6,26 @@ import './ArticleMain.css';
 import postService from '../services/post';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { actionArchive } from '../redux/actions/acrhive';
+import { Toast, ToastBody, ToastContainer, ToastHeader } from 'react-bootstrap';
 
 let API_URL;
 process.env.NODE_ENV === 'development' ?
     API_URL = process.env.REACT_APP_DEV_API_URL : API_URL = process.env.REACT_APP_API_URL
 const ArticleMain = ({textHeadline,children}) => {
+    const { user: currentUser } = useSelector((state) => state.auth);
+    const userId =  useMemo(() => currentUser?.id ?? 0, [currentUser?.id]);
     const dataCategories = useSelector(state => state.category).data;
     const dispatch = useDispatch();
 
     const [categoryId, setCategoryId] = useState(null);
-
+    const [postId, setPostId] = useState(null);
+    
+    const [showUnauthorized, setShowUnauthorized] = useState(false);
+    const [notification, setNotification] = useState(false);
+    const [message, setMessage] = useState('');
+    const [success, setSuccess] = useState(null);
+  
     const params = {
       limit: 5,
       categoryId: categoryId
@@ -42,7 +52,38 @@ const ArticleMain = ({textHeadline,children}) => {
     const getByCategory = id => {
       setCategoryId(id);
       getAllPosts()
+    };
+
+    const messageUnauthorization = () => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Unauthorization',
+        text: 'You must logged In to use this feature',
+        footer: '<a href="/login">Click here to login</a>'
+      })
     }
+
+    const dataArchive = {
+      userId,
+      postId
+    }
+
+    const handleSaveArticle = () => {
+      dispatch(actionArchive(dataArchive)).then((data) => {
+        setMessage(data.message);
+        setSuccess(true);
+      }).catch((err) => {
+        setMessage(err.data.message);
+        setSuccess(false);
+      }).finally(() => {
+        setNotification(true);
+      })
+    };
+
+    const actionSaveArticleButton = (id) => {
+      setPostId(id)
+      userId === 0 ? setShowUnauthorized(true) : handleSaveArticle()
+    };
 
     let url = "https://healthhub.vercel.app/detail-article/" + allPost[0]?.id;
 
@@ -83,6 +124,19 @@ const ArticleMain = ({textHeadline,children}) => {
                     ))
                 }
             </ul>
+            {
+              showUnauthorized && ( messageUnauthorization() )
+            }
+            {
+              notification && (
+                <ToastContainer position="top-end" className="position-fixed p-3">
+                  <Toast bg={success ? 'info' : 'danger'} onClose={() => setNotification(false)} show={notification} delay={3000} autohide>
+                    <ToastHeader><strong className="me-auto">{success ? 'Success' : 'Failed'}</strong></ToastHeader>
+                    <ToastBody>{message}</ToastBody>
+                  </Toast>
+                </ToastContainer>
+              )
+            }
             <div className='container mb-5'>
                 <div className='row'>
                     <div className='col-xs-12 col-sm-12 col-md-12 col-lg-6 '>
@@ -106,8 +160,8 @@ const ArticleMain = ({textHeadline,children}) => {
                                 </Link>
                                 <div className='icon-card'>
                                   <div className="row justify-content-between">
-                                    <div className="col-4"><FaRegBookmark/> Save</div>
-                                    <div className="col-2" style={{textAlign: 'right'}}><FaShare onClick={Share}/></div>
+                                    <div className="col-4 link"><FaRegBookmark onClick={() => actionSaveArticleButton(post.id)}/> Save</div>
+                                    <div className="col-2 link" style={{textAlign: 'right'}}><FaShare onClick={Share}/></div>
                                   </div>                              
                                 </div>
                               </p>
@@ -139,8 +193,8 @@ const ArticleMain = ({textHeadline,children}) => {
                                       </Link>
                                       <div className='icon-card'>
                                         <div className="row justify-content-between">
-                                          <div className="col-4"><FaRegBookmark/> Save</div>
-                                          <div className="col-2" style={{textAlign: 'right'}}><FaShare onClick={Share}/></div>
+                                          <div className="col-4 link"><FaRegBookmark onClick={() => actionSaveArticleButton(post.id)}/> Save</div>
+                                          <div className="col-2 link" style={{textAlign: 'right'}}><FaShare onClick={Share}/></div>
                                         </div>                              
                                       </div>
                                     </p>

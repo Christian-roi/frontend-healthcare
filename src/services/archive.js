@@ -1,6 +1,6 @@
 import api from '../api';
 
-const url = "/api/acrhive";
+const url = "/api/archive";
 
 const getAll = () => {
     return api.get(url);

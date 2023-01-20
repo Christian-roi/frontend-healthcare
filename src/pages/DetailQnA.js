@@ -100,7 +100,7 @@ const DetailQnA = () => {
                     </div>
                     { notification && (
                         <ToastContainer position="top-end" className="position-fixed p-3">
-                            <Toast bg={success ? 'primary' : 'danger'} onClose={() => setNotification(false)} show={notification} delay={3000} autohide>
+                            <Toast bg={success ? 'info' : 'danger'} onClose={() => setNotification(false)} show={notification} delay={3000} autohide>
                                 <ToastHeader><strong className="me-auto">{success ? 'Success' : 'Failed'}</strong></ToastHeader>
                                 <ToastBody>{message}</ToastBody>
                             </Toast>
