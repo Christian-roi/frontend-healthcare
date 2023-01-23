@@ -6,7 +6,7 @@ import './ArticleMain.css';
 import postService from '../services/post';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { actionArchive } from '../redux/actions/acrhive';
+import { actionArchive, fetchArchives } from '../redux/actions/acrhive';
 import { Toast, ToastBody, ToastContainer, ToastHeader } from 'react-bootstrap';
 
 let API_URL;
@@ -19,7 +19,6 @@ const ArticleMain = ({textHeadline,children}) => {
     const dispatch = useDispatch();
 
     const [categoryId, setCategoryId] = useState(null);
-    const [postId, setPostId] = useState(null);
     
     const [showUnauthorized, setShowUnauthorized] = useState(false);
     const [notification, setNotification] = useState(false);
@@ -44,10 +43,17 @@ const ArticleMain = ({textHeadline,children}) => {
       });
     };
 
+    const paramsArchive = {
+      userId
+    }
+
     useEffect(() => {
         dispatch(fetchCategories());
         getAllPosts();
-    }, [dispatch]);
+        if(userId !== 0) {
+          dispatch(fetchArchives(paramsArchive))
+        }
+    }, [dispatch, categoryId]);
 
     const getByCategory = id => {
       setCategoryId(id);
@@ -63,17 +69,16 @@ const ArticleMain = ({textHeadline,children}) => {
       })
     }
 
-    const dataArchive = {
-      userId,
-      postId
-    }
-
-    const handleSaveArticle = () => {
+    const handleSaveArticle = (postId) => {
+      const dataArchive = {
+        userId,
+        postId,
+      }
       dispatch(actionArchive(dataArchive)).then((data) => {
         setMessage(data.message);
         setSuccess(true);
       }).catch((err) => {
-        setMessage(err.data.message);
+        setMessage(err.response.data.message);
         setSuccess(false);
       }).finally(() => {
         setNotification(true);
@@ -81,8 +86,7 @@ const ArticleMain = ({textHeadline,children}) => {
     };
 
     const actionSaveArticleButton = (id) => {
-      setPostId(id)
-      userId === 0 ? setShowUnauthorized(true) : handleSaveArticle()
+      userId === 0 ? setShowUnauthorized(true) : handleSaveArticle(id)
     };
 
     let url = "https://healthhub.vercel.app/detail-article/" + allPost[0]?.id;
@@ -160,7 +164,7 @@ const ArticleMain = ({textHeadline,children}) => {
                                 </Link>
                                 <div className='icon-card'>
                                   <div className="row justify-content-between">
-                                    <div className="col-4 link"><FaRegBookmark onClick={() => actionSaveArticleButton(post.id)}/> Save</div>
+                                    <div className="col-4 link"><span onClick={() => actionSaveArticleButton(post.id)}><FaRegBookmark/> Save</span></div>
                                     <div className="col-2 link" style={{textAlign: 'right'}}><FaShare onClick={Share}/></div>
                                   </div>                              
                                 </div>
@@ -193,7 +197,7 @@ const ArticleMain = ({textHeadline,children}) => {
                                       </Link>
                                       <div className='icon-card'>
                                         <div className="row justify-content-between">
-                                          <div className="col-4 link"><FaRegBookmark onClick={() => actionSaveArticleButton(post.id)}/> Save</div>
+                                          <div className="col-4 link"><span onClick={() => actionSaveArticleButton(post.id)}><FaRegBookmark/> Save</span></div>
                                           <div className="col-2 link" style={{textAlign: 'right'}}><FaShare onClick={Share}/></div>
                                         </div>                              
                                       </div>

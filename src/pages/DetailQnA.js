@@ -63,7 +63,7 @@ const DetailQnA = () => {
             setSuccess(true);
             getQnA(params.id);
         }).catch((err) => {
-            setMessage(err.data.message);
+            setMessage(err.response.data.message);
             setSuccess(false);
         }).finally(() => {
             setNotification(true);

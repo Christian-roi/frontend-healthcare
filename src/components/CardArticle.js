@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaRegBookmark, FaShare } from "react-icons/fa";
+import { FaBookmark, FaRegBookmark, FaShare } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useMemo, useState } from "react";
 import Swal from "sweetalert2";
@@ -7,7 +7,7 @@ import { Toast, ToastBody, ToastContainer, ToastHeader } from "react-bootstrap";
 import { actionArchive } from "../redux/actions/acrhive";
 
 
-const CardArticle = ({ postId, title, image, content }) => {
+const CardArticle = ({ postId, title, image, content, isArchive }) => {
   const { user: currentUser } = useSelector((state) => state.auth);
   const userId =  useMemo(() => currentUser?.id ?? 0, [currentUser?.id]);
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const CardArticle = ({ postId, title, image, content }) => {
       setMessage(data.message);
       setSuccess(true);
     }).catch((err) => {
-      setMessage(err.data.message);
+      setMessage(err.response.data.message);
       setSuccess(false);
     }).finally(() => {
       setNotification(true);
@@ -103,7 +103,10 @@ const CardArticle = ({ postId, title, image, content }) => {
               <div className="mt-3" style={{ color: "#292929" }}>
                 <div className="row justify-content-between">
                   <div className="col-3 link" onClick={actionSaveArticleButton}>
-                    <FaRegBookmark /> Save
+                    {
+                      isArchive ? <FaBookmark className="app-purple-color"/> : <FaRegBookmark /> 
+                    }
+                     Save
                   </div>
                   <div className="col-2 link" style={{ textAlign: "right" }}>
                     <FaShare onClick={Share} />

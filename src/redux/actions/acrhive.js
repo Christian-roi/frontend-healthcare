@@ -5,9 +5,9 @@ import {
 
 import archiveService from '../../services/archive';
 
-export const fetchArchives = () => async dispatch  => {
+export const fetchArchives = (params) => async dispatch  => {
     try {
-        const res = await archiveService.getAll();
+        const res = await archiveService.getAll(params);
 
         dispatch({
             type: FETCH_ARCHIVES,
@@ -24,7 +24,6 @@ export const actionArchive = data => async dispatch => {
 
         dispatch({
             type: ACTION_ARCHIVE,
-            payload: res.data,
         });
 
         return Promise.resolve(res.data);

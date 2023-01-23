@@ -12,8 +12,8 @@ const archiveReducer = (archives = initialState, action) => {
         case FETCH_ARCHIVES:
             return payload;
 
-        case ACTION_ARCHIVE:
-            return [...archives, payload];
+        // case ACTION_ARCHIVE:
+        //     return [...archives, payload];
     
         default:
             return archives;

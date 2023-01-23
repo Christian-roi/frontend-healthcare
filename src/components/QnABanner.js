@@ -22,7 +22,7 @@ const QnABanner = (props) => {
             <p className="hero-text">
               Ask a question and get a response from a doctor.
             </p>
-            <Link to="/qnas" className="btn btn-create-article">
+            <Link to="/qnas" className="btn btn-create-article mb-2">
               Ask a Question
             </Link>
           </div>

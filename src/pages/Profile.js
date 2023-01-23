@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { insertImage, deleteImage } from "../redux/actions/auth";
 import Swal from "sweetalert2";
 import AuthService from "../services/auth";
+import CardArticle from "../components/CardArticle";
 
 let API_URL;
 process.env.NODE_ENV === "development"
@@ -25,6 +26,8 @@ const Profile = () => {
   const [image, setImage] = useState("");
   const [user, setUser] = useState([]);
 
+  const dataArchive = useSelector(state => state.archive).data;
+  console.log("Data Archive",dataArchive)
   const getUser = async (id) => {
     const response = await AuthService.getCurrentUser(id);
     setUser(response.data);
@@ -116,7 +119,7 @@ const Profile = () => {
               <div className="card-body">
                 <h5 className="card-title mb-4">Profile</h5>
                 <div className="row justify-content-center mb-4">
-                  <div className="col-md-3 col-sm-12">
+                  <div className="col-lg-3 col-sm-12">
                     <img
                       src={
                         user.image ? `${API_URL}${user.image}` : blankProfile
@@ -125,7 +128,7 @@ const Profile = () => {
                       className="img-fluid rounded"
                     />
                   </div>
-                  <div className="col-md-6 col-sm-12 ms-5">
+                  <div className="col-lg-6 col-sm-12 ms-3">
                     <p className="card-text">
                       Name:{" "}
                       {currentUser.first_name + " " + currentUser.last_name}
@@ -165,8 +168,21 @@ const Profile = () => {
             </div>
           </div>
           <div className="col-md-8 col-sm-12 my-4">
-            <h4 className="float-start me-3">Saved Article</h4>
-            <hr className="mx-4" />
+            <div className="row">
+              <h4 className="text-start">Saved Article</h4>
+              <hr className="mx-4" />
+            </div>
+            {
+              dataArchive.length > 0 ? dataArchive?.map((archive) => (
+                <CardArticle 
+                    postId={archive.postId}
+                    title={archive.post.title}
+                    image={API_URL+archive.post.image}
+                    content={archive.post.content}
+                    isArchive={true}
+                />
+              )) : ""
+            }
           </div>
         </div>
       </div>

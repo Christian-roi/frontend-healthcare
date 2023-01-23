@@ -2,8 +2,8 @@ import api from '../api';
 
 const url = "/api/archive";
 
-const getAll = () => {
-    return api.get(url);
+const getAll = (params) => {
+    return api.get(url,{params});
 };
 
 const update = (data) => {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaCircle, FaRegBookmark, FaTrash } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
 import postService from "../services/post";
 import commentService from "../services/comment";
@@ -10,11 +10,14 @@ import Footer from "../components/Footer";
 import Swal from "sweetalert2";
 import { addComment } from "../redux/actions/comment";
 import AuthService from "../services/auth";
+import { actionArchive } from "../redux/actions/acrhive";
+import { Toast, ToastBody, ToastContainer, ToastHeader } from "react-bootstrap";
 
 let API_URL;
 process.env.NODE_ENV === 'development' ?
     API_URL = process.env.REACT_APP_DEV_API_URL : API_URL = process.env.REACT_APP_API_URL
 const DetailArticle = () => {
+  const dispatch = useDispatch();
   const data = {};
   const [currentPost, setCurrentPost] = useState(data);
   const [comments, setComments] = useState([]);
@@ -29,6 +32,11 @@ const DetailArticle = () => {
     };
 
   const { user: currentUser } = useSelector((state) => state.auth);
+
+  const [showUnauthorized, setShowUnauthorized] = useState(false);
+  const [notification, setNotification] = useState(false);
+  const [message, setMessage] = useState('');
+  const [success, setSuccess] = useState(null);
 
   const getCommentByPostId = async (id) => {
     commentService.getByPostId(id).then((res) => {
@@ -116,12 +124,40 @@ const DetailArticle = () => {
     }
   }, [params.id]);
 
+  const messageUnauthorization = () => {
+    Swal.fire({
+      icon: 'error',
+      title: 'Unauthorization',
+      text: 'You must logged In to use this feature',
+      footer: '<a href="/login">Click here to login</a>'
+    })
+  }
+  
+  const handleSaveArticle = () => {
+    const dataArchive = {
+      userId: currentUser.id,
+      postId: params.id
+    }
+    dispatch(actionArchive(dataArchive)).then((data) => {
+      setMessage(data.message);
+      setSuccess(true);
+    }).catch((err) => {
+      setMessage(err.response.data.message);
+      setSuccess(false);
+    }).finally(() => {
+      setNotification(true);
+    })
+  };
+
+  const actionSaveArticleButton = () => {
+    currentUser ? handleSaveArticle() : setShowUnauthorized(true)
+  };
+
+
   const changeFormatDate = (createdAt) => {
     let date = new Date(createdAt);
     return date.toDateString();
   };
-
-  // console.log(currentPost.data.user.image);
 
   return (
     <div>
@@ -144,6 +180,19 @@ const DetailArticle = () => {
               </ol>
             </nav>
           </div>
+          {
+            showUnauthorized && ( messageUnauthorization() )
+          }
+          {
+            notification && (
+              <ToastContainer position="top-end" className="position-fixed p-3">
+                <Toast bg={success ? 'info' : 'danger'} onClose={() => setNotification(false)} show={notification} delay={3000} autohide>
+                  <ToastHeader><strong className="me-auto">{success ? 'Success' : 'Failed'}</strong></ToastHeader>
+                  <ToastBody>{message}</ToastBody>
+                </Toast>
+              </ToastContainer>
+            )
+          }
           {currentPost.data ? (
             <section>
               <div className="container">
@@ -188,8 +237,10 @@ const DetailArticle = () => {
                     </div>
                   </div>
                   <div className="col-2">
-                    <FaRegBookmark className="ms-1 me-1" />
-                    Save
+                    <span onClick={actionSaveArticleButton} className="link">
+                      <FaRegBookmark className="ms-1 me-1" />
+                       Save
+                    </span>
                   </div>
                 </div>
                 <div className="row">
