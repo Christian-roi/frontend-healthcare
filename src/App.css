@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Crimson Pro');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 .App {
   text-align: center;
+  font-family: 'Crimson Pro','Roboto',sans-serif;
 }
 
 .App-logo {

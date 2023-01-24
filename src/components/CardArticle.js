@@ -84,7 +84,7 @@ const CardArticle = ({ postId, title, image, content, isArchive }) => {
         <div className="col-md-4 mt-3">
           <img
             src={image}
-            className="img-fluid rounded-start"
+            className="image-article rounded-start"
             alt="Article Thumb"
           />
         </div>
@@ -104,9 +104,8 @@ const CardArticle = ({ postId, title, image, content, isArchive }) => {
                 <div className="row justify-content-between">
                   <div className="col-3 link" onClick={actionSaveArticleButton}>
                     {
-                      isArchive ? <FaBookmark className="app-purple-color"/> : <FaRegBookmark /> 
+                      isArchive ? <><FaBookmark className="app-purple-color"/> Saved</> : <><FaRegBookmark/> Save</> 
                     }
-                     Save
                   </div>
                   <div className="col-2 link" style={{ textAlign: "right" }}>
                     <FaShare onClick={Share} />

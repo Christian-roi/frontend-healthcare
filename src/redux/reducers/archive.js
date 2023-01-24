@@ -3,7 +3,9 @@ import {
     ACTION_ARCHIVE,
 } from '../actions/types';
 
-const initialState = [];
+const archive = JSON.parse(localStorage.getItem("archive"));
+
+const initialState = archive ? archive : [];
 
 const archiveReducer = (archives = initialState, action) => {
     const { type, payload } = action;

@@ -241,10 +241,9 @@ const DetailArticle = () => {
                     <span onClick={actionSaveArticleButton} className="link">
                       {
                          dataArchive && dataArchive.find(da => da.postId === currentPost.data.id) !== undefined 
-                          ? <FaBookmark className="app-purple-color ms-1 me-1"/> 
-                          : <FaRegBookmark className="ms-1 me-1" />
+                          ? <><FaBookmark className="app-purple-color ms-1 me-1"/> Saved</>  
+                          : <><FaRegBookmark className="ms-1 me-1"/> Save</>   
                       }
-                       Save
                     </span>
                   </div>
                 </div>

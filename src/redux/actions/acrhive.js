@@ -8,6 +8,7 @@ import archiveService from '../../services/archive';
 export const fetchArchives = (params) => async dispatch  => {
     try {
         const res = await archiveService.getAll(params);
+        localStorage.setItem("archive", JSON.stringify(res.data))
 
         dispatch({
             type: FETCH_ARCHIVES,
@@ -21,6 +22,8 @@ export const fetchArchives = (params) => async dispatch  => {
 export const actionArchive = data => async dispatch => {
     try {
         const res = await archiveService.update(data);
+        localStorage.removeItem("archive")
+        localStorage.setItem("archive", JSON.stringify(res.data))
 
         dispatch({
             type: ACTION_ARCHIVE,

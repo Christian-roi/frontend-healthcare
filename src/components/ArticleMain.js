@@ -169,10 +169,9 @@ const ArticleMain = ({textHeadline,children}) => {
                                       <span onClick={() => actionSaveArticleButton(post.id)}>
                                         { 
                                           dataArchive && dataArchive.find(da => da.postId === post.id) !== undefined 
-                                          ? <FaBookmark className="app-purple-color"/>
-                                          : <FaRegBookmark/> 
+                                          ? <><FaBookmark className="app-purple-color"/> Saved</>  
+                                          : <><FaRegBookmark/> Save</> 
                                         }
-                                         Save
                                       </span>
                                     </div>
                                     <div className="col-2 link" style={{textAlign: 'right'}}><FaShare onClick={Share}/></div>
@@ -190,7 +189,7 @@ const ArticleMain = ({textHeadline,children}) => {
                             allPost.length > 0 ? allPost.slice(1)?.map((post) => (
                               <div className="col">
                                 <div className="card h-100" key={post.id}>
-                                  <img src={API_URL+post.image} className="card-img-top" alt="..."/>
+                                  <img src={API_URL+post.image} className="card-img-top image-article" alt="..."/>
                                   <div className="card-body">
                                     <h5 className="card-title">
                                       <Link to={'/detail-article/'+post.id}>
@@ -206,18 +205,17 @@ const ArticleMain = ({textHeadline,children}) => {
                                         Read More
                                       </Link>
                                       <div className='icon-card'>
-                                        <div className="row justify-content-between">
-                                          <div className="col-4 link">
+                                        <div className="row justify-content-between ">
+                                          <div className="col-4 link action-icon bookmark-icon">
                                             <span onClick={() => actionSaveArticleButton(post.id)}>
                                               { 
                                                 dataArchive && dataArchive.find(da => da.postId === post.id) !== undefined 
-                                                ? <FaBookmark className="app-purple-color"/>
-                                                : <FaRegBookmark/> 
+                                                ? <><FaBookmark className="app-purple-color"/>Saved</>  
+                                                : <><FaRegBookmark/> Save</>   
                                               }
-                                              Save
                                             </span>
                                           </div>
-                                          <div className="col-2 link" style={{textAlign: 'right'}}><FaShare onClick={Share}/></div>
+                                          <div className="col-2 link action-icon share-icon"><FaShare onClick={Share}/></div>
                                         </div>                              
                                       </div>
                                     </p>
