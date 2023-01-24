@@ -17,7 +17,8 @@ const Articles = () => {
     const { user: currentUser } = useSelector((state) => state.auth);
     const isEditorOrDoctor = currentUser && ["Editor","Doctor"].includes(currentUser.role);
     const dataCategories = useSelector(state => state.category).data;
-    
+    const dataArchive = useSelector(state => state.archive).data;
+  
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -136,6 +137,7 @@ const Articles = () => {
                                         title={post.title} 
                                         image={API_URL+post.image} 
                                         content={post.content} 
+                                        isArchive={dataArchive && dataArchive.find(da => da.postId === post.id) !== undefined ? true : false}
                                     />
                                 )) : ""
                             }

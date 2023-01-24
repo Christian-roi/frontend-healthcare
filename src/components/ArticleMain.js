@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FaRegBookmark, FaShare } from 'react-icons/fa';
+import { FaBookmark, FaRegBookmark, FaShare } from 'react-icons/fa';
 import { fetchCategories } from '../redux/actions/category';
 import './ArticleMain.css';
 import postService from '../services/post';
@@ -15,7 +15,8 @@ process.env.NODE_ENV === 'development' ?
 const ArticleMain = ({textHeadline,children}) => {
     const { user: currentUser } = useSelector((state) => state.auth);
     const userId =  useMemo(() => currentUser?.id ?? 0, [currentUser?.id]);
-    const dataCategories = useSelector(state => state.category).data;
+    const dataCategories = useSelector(state => state.category).data;const dataArchive = useSelector(state => state.archive).data;
+
     const dispatch = useDispatch();
 
     const [categoryId, setCategoryId] = useState(null);
@@ -164,7 +165,16 @@ const ArticleMain = ({textHeadline,children}) => {
                                 </Link>
                                 <div className='icon-card'>
                                   <div className="row justify-content-between">
-                                    <div className="col-4 link"><span onClick={() => actionSaveArticleButton(post.id)}><FaRegBookmark/> Save</span></div>
+                                    <div className="col-4 link">
+                                      <span onClick={() => actionSaveArticleButton(post.id)}>
+                                        { 
+                                          dataArchive && dataArchive.find(da => da.postId === post.id) !== undefined 
+                                          ? <FaBookmark className="app-purple-color"/>
+                                          : <FaRegBookmark/> 
+                                        }
+                                         Save
+                                      </span>
+                                    </div>
                                     <div className="col-2 link" style={{textAlign: 'right'}}><FaShare onClick={Share}/></div>
                                   </div>                              
                                 </div>
@@ -197,7 +207,16 @@ const ArticleMain = ({textHeadline,children}) => {
                                       </Link>
                                       <div className='icon-card'>
                                         <div className="row justify-content-between">
-                                          <div className="col-4 link"><span onClick={() => actionSaveArticleButton(post.id)}><FaRegBookmark/> Save</span></div>
+                                          <div className="col-4 link">
+                                            <span onClick={() => actionSaveArticleButton(post.id)}>
+                                              { 
+                                                dataArchive && dataArchive.find(da => da.postId === post.id) !== undefined 
+                                                ? <FaBookmark className="app-purple-color"/>
+                                                : <FaRegBookmark/> 
+                                              }
+                                              Save
+                                            </span>
+                                          </div>
                                           <div className="col-2 link" style={{textAlign: 'right'}}><FaShare onClick={Share}/></div>
                                         </div>                              
                                       </div>

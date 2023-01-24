@@ -24,6 +24,7 @@ export const actionArchive = data => async dispatch => {
 
         dispatch({
             type: ACTION_ARCHIVE,
+            payload: res.data
         });
 
         return Promise.resolve(res.data);

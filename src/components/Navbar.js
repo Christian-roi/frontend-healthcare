@@ -20,6 +20,7 @@ const Navbar = () => {
 
   const handleLogout = useCallback(() => {
     dispatch(logout());
+    window.location.reload();
   }, [dispatch]);
 
   return (

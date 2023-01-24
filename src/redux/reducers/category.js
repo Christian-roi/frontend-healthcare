@@ -1,6 +1,9 @@
 import { FETCH_CATEGORIES } from '../actions/types';
 
-const initialState = [];
+const category = JSON.parse(localStorage.getItem("category"));
+
+const initialState = category
+    ? category : [];
 
 const categoryReducer = (categories = initialState, action) => {
     const { type, payload } = action;

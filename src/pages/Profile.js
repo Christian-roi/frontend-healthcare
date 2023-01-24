@@ -27,7 +27,6 @@ const Profile = () => {
   const [user, setUser] = useState([]);
 
   const dataArchive = useSelector(state => state.archive).data;
-  console.log("Data Archive",dataArchive)
   const getUser = async (id) => {
     const response = await AuthService.getCurrentUser(id);
     setUser(response.data);

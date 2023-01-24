@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaCircle, FaRegBookmark, FaTrash } from "react-icons/fa";
+import { FaBookmark, FaCircle, FaRegBookmark, FaTrash } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
@@ -32,6 +32,7 @@ const DetailArticle = () => {
     };
 
   const { user: currentUser } = useSelector((state) => state.auth);
+  const dataArchive = useSelector(state => state.archive).data;
 
   const [showUnauthorized, setShowUnauthorized] = useState(false);
   const [notification, setNotification] = useState(false);
@@ -238,7 +239,11 @@ const DetailArticle = () => {
                   </div>
                   <div className="col-2">
                     <span onClick={actionSaveArticleButton} className="link">
-                      <FaRegBookmark className="ms-1 me-1" />
+                      {
+                         dataArchive && dataArchive.find(da => da.postId === currentPost.data.id) !== undefined 
+                          ? <FaBookmark className="app-purple-color ms-1 me-1"/> 
+                          : <FaRegBookmark className="ms-1 me-1" />
+                      }
                        Save
                     </span>
                   </div>
